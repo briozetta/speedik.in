@@ -1,0 +1,72 @@
+// components/CarCard.jsx
+import Image from "next/image"; // Import Next.js Image component
+import { IoMdBookmark } from "react-icons/io"; // Import the bookmark icon
+import { IoMdCar } from "react-icons/io"; // Example: Car icon
+import { FaGasPump, FaCogs } from "react-icons/fa"; // Fuel and transmission icons
+import Link from "next/link";
+import { Separator } from "../ui/separator";
+import { IoIosArrowRoundForward } from "react-icons/io";
+import { TbManualGearbox } from "react-icons/tb";
+
+export default function CarCard({ car }) {
+  return (
+    <div className="bg-white rounded-lg shadow-sm border rounded-t-xl overflow-hidden ">
+      {/* Car Image */}
+      <div className="relative w-full h-52">
+        <Image
+          src={car.image}
+          alt={car.model}
+          fill // Ensure the image takes the full width/height of the container 
+          // Similar to object-cover in img tag
+          className="rounded-t-xl"
+        />
+        {/* Price Tag */}
+        <div className="absolute top-2 left-2 bg-emerald-600 text-white px-3 py-1 rounded-full text-sm">
+          {car.tag}
+        </div>
+        {/* Save Button */}
+        <button className="absolute top-2 right-2 bg-white rounded-full p-2 shadow">
+          <IoMdBookmark className="w-5 h-5 text-gray-800" />
+        </button>
+      </div>
+
+      <div className="p-3 px-6">
+        {/* Car Details */}
+        <div>
+          <h3 className="text-lg font-normal">{car.model}</h3>
+          <p className="text-gray-500 text-[14px] py-1 pb-2">
+            {car.description}
+          </p>
+          <Separator />
+
+          <div className="flex items-center justify-between my-4 space-x-4">
+            <div className="flex flex-col gap-1 items-center space-x-1">
+              <IoMdCar className="text-gray-600 w-5 h-5" />
+              <span className="text-gray-600 text-sm">{car.mileage} Miles</span>
+            </div>
+            <div className="flex flex-col gap-1 items-center space-x-1">
+              <FaGasPump className="text-gray-600 w-5 h-5" />
+              <span className="text-gray-600 text-sm">{car.fuel}</span>
+            </div>
+            <div className="flex flex-col gap-1 items-center space-x-1">
+              <TbManualGearbox className="text-gray-600 w-5 h-5" />
+              <span className="text-gray-600 text-sm">{car.transmission}</span>
+            </div>
+          </div>
+          <Separator />
+        </div>
+
+        {/* Price and Link */}
+        <div className="my-2 mt-3 flex justify-between items-center">
+          <span className="text-xl text-gray-700 font-semibold">₹{car.price}</span>
+          <Link
+            href={"/vehicle-details"}
+            className="text-blue-600 flex gap-1 justify-center items-center hover:text-blue-800 text-sm"
+          >
+            View Details <IoIosArrowRoundForward className="-rotate-45" size={22} />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,7 +1,15 @@
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import DynamicNavbar from "@/components/helpers/DynamicNavbar";
+import SmoothScrollProvider from "@/components/helpers/SmoothScrollProvider";
+import ClientWrapper from "@/redux/ClientWrapper";
 
-const inter = Inter({ subsets: ["latin"] });
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  variable: "--font-Poppins",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +19,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={poppins.className}>
+        <ClientWrapper>
+          <SmoothScrollProvider>
+            <nav className=" sm:padding-x shadow-lg shadow-slate-100"> <DynamicNavbar /></nav>
+            {children}
+          </SmoothScrollProvider>
+        </ClientWrapper>
+      </body>
     </html>
   );
 }
