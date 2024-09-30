@@ -12,14 +12,11 @@ import { MdOutlineColorLens, MdOutlineDriveEta } from "react-icons/md";
 import {
   FaMapMarkerAlt,
   FaPhoneAlt,
-  FaEnvelope,
-  FaDirections,
-  FaWhatsapp,
   FaArrowRight,
 } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Separator } from "../ui/separator";
+
 
 const VehicleOverview = () => {
   const carDetails = [

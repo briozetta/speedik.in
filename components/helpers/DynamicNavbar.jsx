@@ -7,7 +7,7 @@ export default function DynamicNavbar() {
     const pathname = usePathname()
   return (
     <>
-    {pathname.includes("dashboard")?<DashboardNavbar/>:<Navbar/>}
+    {pathname.includes("admin")?<DashboardNavbar/>:<Navbar/>}
     </>
   )
 }

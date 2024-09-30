@@ -1,14 +1,14 @@
 // components/CarCard.jsx
-import Image from "next/image"; // Import Next.js Image component
-import { IoMdBookmark } from "react-icons/io"; // Import the bookmark icon
-import { IoMdCar } from "react-icons/io"; // Example: Car icon
-import { FaGasPump, FaCogs } from "react-icons/fa"; // Fuel and transmission icons
+import Image from "next/image"; 
+import { IoMdBookmark } from "react-icons/io"; 
+import { IoMdCar } from "react-icons/io";
+import { FaGasPump, FaCogs } from "react-icons/fa"; 
 import Link from "next/link";
 import { Separator } from "../ui/separator";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { TbManualGearbox } from "react-icons/tb";
 
-export default function CarCard({ car }) {
+export default function VehicleCard({ car }) {
   return (
     <div className="bg-white rounded-lg shadow-sm border rounded-t-xl overflow-hidden ">
       {/* Car Image */}
@@ -16,8 +16,9 @@ export default function CarCard({ car }) {
         <Image
           src={car.image}
           alt={car.model}
-          fill // Ensure the image takes the full width/height of the container 
-          // Similar to object-cover in img tag
+          fill 
+          sizes="(min-width: 808px) 50vw, 100vw"
+          placeholder="blur"
           className="rounded-t-xl"
         />
         {/* Price Tag */}

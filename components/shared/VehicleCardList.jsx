@@ -1,9 +1,9 @@
 import React from 'react';
-import CarCard from '../helpers/CarCard';
+import VehicleCard from '../helpers/VehicleCard';
 import car from "@/public/assets/car.webp";
 import pickup from "@/public/assets/pickup.jpg";
 
-export default function CarCardList() {
+export default function VehicleCardList() {
   const cars = [
     {
       model: 'Toyota Camry New',
@@ -143,7 +143,7 @@ export default function CarCardList() {
       <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {cars.map((car, index) => (
-          <CarCard key={index} car={car} />
+          <VehicleCard key={index} car={car} />
         ))}
       </div>
     </div>

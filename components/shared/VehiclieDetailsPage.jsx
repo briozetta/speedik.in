@@ -4,7 +4,7 @@ import Image from "next/image";
 import car from "@/public/assets/car.webp";
 import pickup from "@/public/assets/pickup.jpg";
 import CarouselButton from "../helpers/CarouselButton";
-import CarDetails from "../helpers/CarDetails";
+import VehcicleShortOverview from "../helpers/VehcicleShortOverview";
 import { FaCalendarAlt, FaTachometerAlt, FaCogs, FaGasPump } from 'react-icons/fa';
 import { IoMdPricetags } from 'react-icons/io';
 import Link from 'next/link';
@@ -94,7 +94,7 @@ export default function VehicleDetailsPage() {
                     <div className="w-full lg:w-2/3 relative">
                         <Image
                             src={carImages[currentImage]}
-                            priority
+                            placeholder="blur"
                             alt="Car"
                             className="w-full h-full object-cover"
                         />
@@ -105,7 +105,7 @@ export default function VehicleDetailsPage() {
 
                     {/* Car Details */}
                     <div className="w-full md:w-1/2 p-6">
-                        <CarDetails />
+                        <VehcicleShortOverview />
                     </div>
                 </div>
             </div>

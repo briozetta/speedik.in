@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaExclamationTriangle, FaCommentDots ,FaCheckCircle } from "react-icons/fa";
 
-export default function CarDetails() {
+export default function VehcicleShortOverview() {
   return (
     <>
       <h4 className="text-2xl font-bold text-gray-800 mb-2">2023 Mercedes-Benz GLE 300d</h4>

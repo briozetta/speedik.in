@@ -1,4 +1,4 @@
-"use client"; // This file is now a Client Component
+"use client"; 
 
 import { Provider } from 'react-redux';
 import store from '@/redux/store';
