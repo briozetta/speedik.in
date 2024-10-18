@@ -1,4 +1,3 @@
-import React from 'react'
 import { authOptions } from '../utils/authOptions'
 import { getServerSession } from 'next-auth'
 

@@ -9,13 +9,12 @@ import { authOptions } from "@/app/utils/authOptions";
 
 export async function POST(request) {
   try {
-    const session = await getServerSession(authOptions);
+    // const session = await getServerSession(authOptions);
     
     
     const data = await request.json(); 
     const { firstName, lastName, contact, password } = data;
-    console.log(firstName, lastName, contact, password); 
-
+  
     // Connect to the database
     await connectDatabase();
     

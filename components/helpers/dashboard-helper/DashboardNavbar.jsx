@@ -14,7 +14,7 @@ import {
   Search,
   Settings,
   ShoppingCart,
-  Users2,
+  Users2,Car
 } from "lucide-react";
 
 import {
@@ -57,9 +57,9 @@ const navItems = [
     navLink:"/admin/dashboad-add-agent"
   },
   {
-    name:"Orders",
-    icon:PanelsTopLeft,
-    navLink:"/admin/dashboard-orders"
+    name:"Add Products",
+    icon:Car,
+    navLink:"/add-products"
   },
   {
     name:"Dashboard",
@@ -73,7 +73,7 @@ export default function DashboardNavbar() {
 
   return (
     <div className="flex  w-full flex-col bg-muted/40 ">
-      <aside className="fixed inset-y-0 left-0 z-10 hidden w-[68px] flex-col border-r bg-background sm:flex">
+      <aside className="fixed inset-y-0 left-0 z-10 hidden w-[125px] flex-col border-r bg-background sm:flex">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
           <Link
             href="/"
@@ -82,29 +82,30 @@ export default function DashboardNavbar() {
             <Home className="h-4 w-9 transition-all group-hover:scale-110" />
             <span className="sr-only">Go-Home</span>
           </Link>
-          <TooltipProvider>
+          
 
           {/* map NavItems */}
           {navItems.map((item,index)=>(
-            <Tooltip key={index}>
-            <TooltipTrigger asChild>
+            
+              
               <Link
+              key={index}
                 href={item.navLink}
-                className={`flex h-10 w-10 items-center justify-center rounded-lg 
-                  ${pathName === item.navLink ? "bg-emerald-700 text-white hover:text-emerald-50"
-                    : "bg-gray-100 text-slate-800"} text-muted-foreground
-               transition-colors hover:text-foreground md:h-8 md:w-8`}
+                className={`flex justify-between items-center mt-4 rounded-md gap-2 p-2 w-auto
+                  ${pathName === item.navLink ? "bg-emerald-600 text-white hover:text-[#00cc99]"
+                    : "bg-gray-100 text-slate-800 hover:text-[#00cc99]"} `}
               >
-                <item.icon className="h-6 w-6" />
-                <span className="sr-only">{item.name}</span>
+                <item.icon size={20}/>
+                <span className="text-xs">{item.name}</span>
               </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">{item.name}</TooltipContent>
-          </Tooltip>
+             
+           
+            
+        
 
           ))}
          
-          </TooltipProvider>
+          
         </nav>
         <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
           <TooltipProvider>
