@@ -23,7 +23,7 @@ export default function VehicleAddForm({
    const vehicleType = watch("vehicleType", "Select Vehicle Type");
    const transmissionType = watch("transmissionType", "Select Transmission Type");
    const ownership = watch("ownership", "Select Ownership");
-   const condition = watch("conditionn", "Select Condition");
+   const condition = watch("condition", "Select Condition");
 
   return (
     <form
