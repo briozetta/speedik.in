@@ -37,7 +37,7 @@ export default function AddProducts() {
     <Dashboardlayout>
       <div className="flex justify-start">
         <h2 className="scroll-m-20 border-b px-7 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Add your vehicles
+          Add your vehicle
         </h2>
       </div>
 
