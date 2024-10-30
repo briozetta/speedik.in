@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { FloatingInput, FloatingLabel } from "@/components/ui/FloatingInput";
+import { LuLoader2 } from "react-icons/lu";
 import {
   Select,
   SelectContent,
@@ -11,7 +12,7 @@ import {
 import FileUploader from "./FileUploader";
 
 export default function VehicleAddForm({
-  setValue,
+  setValue,formLoading,
   onSubmit,
   handleSubmit,
   register,
@@ -291,8 +292,9 @@ export default function VehicleAddForm({
       </div>
 
       {/* Submit Button */}
-      <Button type="submit" className="px-6  text-white rounded">
-        Create Vehicle
+      <Button type="submit" className="px-6 mt-8  text-white rounded">
+        {formLoading?<div className="flex justify-center items-center gap-2">
+          Submitting <LuLoader2 className=" mt-1 animate-spin"/></div>:"Create Vehicle"}
       </Button>
     </form>
   );

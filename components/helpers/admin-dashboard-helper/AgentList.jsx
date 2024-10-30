@@ -73,8 +73,8 @@ export default function AgentList() {
             {/* map the users */}
             <TableBody>
               {filteredUsers.length > 0
-                ? filteredUsers.map((user) => (
-                    <TableRow className="cursor-pointer" key={user._id}>
+                ? filteredUsers.map((user,index) => (
+                    <TableRow className="cursor-pointer" key={index}>
                       <TableCell className="hidden sm:table-cell">
                         <Image
                           src={imagex}

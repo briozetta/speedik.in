@@ -1,9 +1,21 @@
+import { authOptions } from "@/app/utils/authOptions";
 import { connectDatabase } from "@/lib/database"; 
 import User from "@/lib/database/models/UserSchema";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
     try {
+         const session = await getServerSession(authOptions);
+         if (!session) {
+            return new Response('You must be logged in to access this resource', { status: 401 });
+        }
+        
+        // check if the user is an admin
+        if (session.user?.role !== 'Admin') {
+            return new Response('You are not an admin', { status: 403 });
+        }
+         
         // Connect to the database
         await connectDatabase();
 
