@@ -10,7 +10,7 @@ export default function Page() {
 
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense>
         <AddProducts id={id} />
       </Suspense>
     </div>
