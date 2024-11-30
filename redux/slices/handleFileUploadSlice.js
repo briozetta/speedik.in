@@ -33,23 +33,37 @@ const fileSlice = createSlice({
       state.uploadedImages = [];
       state.primaryImage = null;
     },
+    
     deleteImage: (state, action) => {
-      const filteredImages = state.uploadedImages.filter(image => image.filename !== action.payload);
+      // Use the URL to filter out the image to delete
+      const filteredImages = state.uploadedImages.filter(image => image.url !== action.payload);
       state.uploadedImages = filteredImages;
+    
+      // If the primary image is the one being deleted, reset it
       if (state.primaryImage === action.payload) {
         state.primaryImage = null;
       }
     },
+    
     setPrimaryImage: (state, action) => {
-      const primaryImageFilename = action.payload;
-
+      const primaryImageUrl = action.payload;
+    console.log('redux image url---',primaryImageUrl);
+    
       // Move the primary image to the front of the array
-      const updatedImages = state.uploadedImages.filter(image => image.filename !== primaryImageFilename);
-      const primaryImage = state.uploadedImages.find(image => image.filename === primaryImageFilename);
-      
-      state.uploadedImages = [primaryImage, ...updatedImages]; // Place primary at the front
-      state.primaryImage = primaryImageFilename;
+      const updatedImages = state.uploadedImages.filter(image => image.url !== primaryImageUrl);
+      const primaryImage = state.uploadedImages.find(image => image.url === primaryImageUrl);
+    
+      // If the image is found, move it to the front and update the primary image
+      if (primaryImage) {
+        state.uploadedImages = [primaryImage, ...updatedImages]; // Place primary at the front
+        state.primaryImage = primaryImageUrl;
+      }
     },
+
+    setUploadedImages: (state, action) => {
+      state.uploadedImages = action.payload.map((link) => ({ url: link }));
+    },
+    
   },
   extraReducers: (builder) => {
     builder
@@ -68,6 +82,6 @@ const fileSlice = createSlice({
   },
 });
 
-export const { clearUploadedImages, deleteImage, setPrimaryImage } = fileSlice.actions;
+export const { clearUploadedImages, deleteImage, setPrimaryImage,setUploadedImages } = fileSlice.actions;
 export default fileSlice.reducer;
 

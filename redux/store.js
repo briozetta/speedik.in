@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import dataReducer from './slices/dataSlice';
 import createUserSlice from "./slices/createUserSlice"
 import userFilter from "./slices/userFilter"
+import carFilterDashboad from "./slices/carFilterDashboad"
 import fileReducer  from "./slices/handleFileUploadSlice"
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
     data: dataReducer,
     user: createUserSlice, 
     userFilter:userFilter,
-    files:fileReducer 
+    files:fileReducer ,
+    carFilters:carFilterDashboad
    
   },
 });

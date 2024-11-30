@@ -1,23 +1,16 @@
+"use client";
+//imports
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { FloatingInput, FloatingLabel } from "@/components/ui/FloatingInput";
 import { LuLoader2 } from "react-icons/lu";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
+import {Select,SelectContent,SelectGroup,SelectItem,SelectTrigger,
 } from "@/components/ui/select";
 import FileUploader from "./FileUploader";
 
-export default function VehicleAddForm({
-  setValue,formLoading,
-  onSubmit,
-  handleSubmit,
-  register,
-  errors,
-  watch,
+export default function VehicleAddForm({id,
+  uploadedImagesFetched,setValue,formLoading,onSubmit,
+  handleSubmit,register,errors,watch,
 }) {
    // Watching the selected values
    const fuelType = watch("fuelType", "Select Fuel Type");
@@ -118,7 +111,7 @@ export default function VehicleAddForm({
       </div>
 
       {/* Image Uploader */}
-      <FileUploader />
+      <FileUploader uploadedImagesFetched={uploadedImagesFetched}/>
 
       {/* Transmission and Ownership */}
       <div className="flex w-full gap-4">
@@ -292,10 +285,18 @@ export default function VehicleAddForm({
       </div>
 
       {/* Submit Button */}
-      <Button type="submit" className="px-6 mt-8  text-white rounded">
-        {formLoading?<div className="flex justify-center items-center gap-2">
-          Submitting <LuLoader2 className=" mt-1 animate-spin"/></div>:"Create Vehicle"}
-      </Button>
+      <Button type="submit" className="px-6 mt-8 text-white rounded">
+  {formLoading ? (
+    <div className="flex justify-center items-center gap-2">
+      Submitting <LuLoader2 className="mt-1 animate-spin" />
+    </div>
+  ) : id ? (
+    "Update Vehicle"  // If vehicleId exists, it's an update
+  ) : (
+    "Create Vehicle"  // If vehicleId doesn't exist, it's a create
+  )}
+</Button>
+
     </form>
   );
 }

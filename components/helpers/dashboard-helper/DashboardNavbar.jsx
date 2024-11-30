@@ -1,78 +1,59 @@
 "use client";
 import Link from "next/link";
-import {
-  PanelsTopLeft,
-  File,
-  Home,
-  LineChart,
-  ListFilter,
-  MoreHorizontal,
-  Package,
-  Package2,
-  PanelLeft,
-  PlusCircle,
-  Search,
-  Settings,
-  ShoppingCart,
-  Users2,Car
-} from "lucide-react";
+import {Home,LineChart,Package2,PanelLeft,Settings,} from "lucide-react";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-  TooltipProvider,
-} from "@/components/ui/tooltip";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
+import {Tooltip,TooltipContent,TooltipTrigger,TooltipProvider,} from "@/components/ui/tooltip";
+import {Breadcrumb,BreadcrumbItem,BreadcrumbLink,BreadcrumbList,BreadcrumbPage,BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import pickup from "@/public/assets/pickup.jpg";
+import {DropdownMenu,DropdownMenuContent,DropdownMenuItem,DropdownMenuLabel,DropdownMenuSeparator,
+DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
+import profileVector from "@/public/assets/profileVector.webp";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-
-const navItems = [
-  {
-    name:"Dashboard",
-    icon:PanelsTopLeft,
-    navLink:"/admin/dashboard-home"
-  },
-  {
-    name:"Add Agents",
-    icon:Users2,
-    navLink:"/admin/dashboad-add-agent"
-  },
-  {
-    name:"Add Products",
-    icon:Car,
-    navLink:"/add-products"
-  },
-  {
-    name:"Dashboard",
-    icon:PanelsTopLeft,
-    navLink:"/admin/dashboard-hoe"
-  },
-]
+import { FcAdvertising ,FcMultipleDevices  ,FcReadingEbook ,FcAddImage  } from "react-icons/fc";
+import { useSession } from "next-auth/react";
+import { useAgents } from "@/hooks/useAgents";
+import EditAgentForm from "../admin-dashboard-helper/EditAgentForm";
 
 export default function DashboardNavbar() {
   const pathName = usePathname();
+  const { data: session } = useSession();
+  const role = session?.user?.role
+  const userId = session?.user?._id
+  const { handleRefresh } = useAgents();
 
+  const navItems = [
+    {
+      name:"Dashboard",
+      icon:FcMultipleDevices  ,
+      protected:false,
+      navLink:"/admin/dashboard-home"
+    },
+    {
+      name:"Add Agents",
+      icon:FcReadingEbook ,
+      protected: role === "Admin" ? false : true,
+      navLink:"/admin/dashboad-add-agent"
+    },
+    {
+      name:"Add Vehicle",
+      icon:FcAddImage ,
+      protected:false,
+      navLink:"/add-vehicles"
+    },
+    {
+      name:"Add Ads",
+      icon:FcAdvertising,
+      protected: role === "Admin" ? false : true,
+      navLink:"/admin/dashboard-add-advertisement"
+    },
+  ]
+ 
   return (
     <div className="flex  w-full flex-col bg-muted/40 ">
+     
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-[125px] flex-col border-r bg-background sm:flex">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
           <Link
@@ -82,12 +63,10 @@ export default function DashboardNavbar() {
             <Home className="h-4 w-9 transition-all group-hover:scale-110" />
             <span className="sr-only">Go-Home</span>
           </Link>
-          
-
+        
           {/* map NavItems */}
-          {navItems.map((item,index)=>(
-            
-              
+          {navItems.map((item,index)=>( 
+             item.protected === false && (
               <Link
               key={index}
                 href={item.navLink}
@@ -98,11 +77,8 @@ export default function DashboardNavbar() {
                 <item.icon size={20}/>
                 <span className="text-xs">{item.name}</span>
               </Link>
-             
-           
-            
-        
-
+            )
+       
           ))}
          
           
@@ -111,13 +87,14 @@ export default function DashboardNavbar() {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Link
-                  href="#"
+                <span
+                 
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
-                  <Settings className="h-5 w-5" />
-                  <span className="sr-only">Settings</span>
-                </Link>
+                 
+                  <span className="sr-only">settings</span>
+                  <EditAgentForm userId={userId} role={true} handleRefresh={handleRefresh}/>
+                </span>
               </TooltipTrigger>
               <TooltipContent side="right">Settings</TooltipContent>
             </Tooltip>
@@ -152,13 +129,13 @@ export default function DashboardNavbar() {
                    {item.name}
                  </Link>
                 ))}
-                <Link
-                  href="#"
+                <span
+                 
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
                   <LineChart className="h-5 w-5" />
                   Settings
-                </Link>
+                </span>
               </nav>
             </SheetContent>
           </Sheet>
@@ -191,7 +168,7 @@ export default function DashboardNavbar() {
                   className="overflow-hidden border-2 border-emerald-500 rounded-full"
                 >
                   <Image
-                    src={pickup}
+                    src={profileVector}
                     width={100}
                     height={100}
                     alt="Avatar"

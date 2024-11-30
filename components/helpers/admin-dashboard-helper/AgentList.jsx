@@ -1,4 +1,5 @@
 "use client";
+import EditAgentForm from "./EditAgentForm";
 // imports
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
@@ -112,7 +113,7 @@ export default function AgentList() {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem>Edit</DropdownMenuItem>
+                            <DropdownMenuLabel><EditAgentForm userId={user._id} handleRefresh={handleRefresh}/></DropdownMenuLabel>
                             <DropdownMenuItem>Delete</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>

@@ -18,7 +18,7 @@ export default function Loginform() {
     <>
       <form className="space-y-4" onSubmit={handleFormSubmit}>
         <input
-          type="email"
+          type="text"
           onChange={(e) => setContact(e.target.value)}
           placeholder="name@example.com / phone number"
           className="w-full p-3 bg-gray-800 text-white rounded-md focus:outline-none"

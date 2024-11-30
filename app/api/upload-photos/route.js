@@ -96,6 +96,7 @@ export async function POST(request) {
       }
     }
 
+
     // Return the uploaded file URLs
     return NextResponse.json({ ok: true, message: "Files uploaded successfully", files: uploadResults }, { status: 201 });
   } catch (error) {

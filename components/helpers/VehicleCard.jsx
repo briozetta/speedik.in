@@ -2,7 +2,7 @@
 import Image from "next/image"; 
 import { IoMdBookmark } from "react-icons/io"; 
 import { IoMdCar } from "react-icons/io";
-import { FaGasPump, FaCogs } from "react-icons/fa"; 
+import { FaGasPump } from "react-icons/fa"; 
 import Link from "next/link";
 import { Separator } from "../ui/separator";
 import { IoIosArrowRoundForward } from "react-icons/io";

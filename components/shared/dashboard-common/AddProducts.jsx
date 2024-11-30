@@ -1,4 +1,5 @@
 "use client";
+// Import dependencies and components
 import VehicleAddForm from "@/components/helpers/dashboard-helper/VehicleAddForm";
 import Dashboardlayout from "@/components/ui/Dashboard-layout";
 import axios from "axios";
@@ -7,37 +8,26 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
-import {
-  clearUploadedImages
-} from "@/redux/slices/handleFileUploadSlice";
+import { clearUploadedImages } from "@/redux/slices/handleFileUploadSlice";
+import useSWR from "swr";
 
-export default function AddProducts() {
-  const { uploadedImages, isLoading, error } = useSelector(
-    (state) => state.files
-  );
+export default function AddProducts({ id }) {
+  const { uploadedImages, isLoading, error } = useSelector((state) => state.files);
+  const fetcher = (url) => fetch(url).then((r) => r.json());
+
+  // Fetch vehicle data if `id` is provided for editing
+  const { data } = useSWR(id ? `/api/get-single-vehicle?id=${id}` : null, fetcher);
+
   const { data: session } = useSession();
   const dispatch = useDispatch();
   const [formLoading, setFormLoading] = useState(false);
+  const [uploadedImagesFetched, setUploadedImagesFetched] = useState([]);
   const userId = session?.user?._id;
   const userData = session?.user;
 
-  useEffect(() => {
-    if (formLoading) {
-      toast.info("submitting please wait...", { position: "top-center" });
-    }
-    if (isLoading) {
-      toast.info("Uploading...", { position: "top-center" });
-    } else if (error) {
-      console.log(error.error);
-
-      toast.error(`${error.error}`, { position: "top-center" });
-    } else if (uploadedImages.length > 0) {
-      toast.success("Files uploaded successfully!", { position: "top-center" ,onAutoClose:1000});
-    }
-  }, [isLoading, error, formLoading]);
-
+  // Initialize form with user's full name if available
   const {
-    register,
+    register,control,
     handleSubmit,
     formState: { errors },
     setValue,
@@ -45,42 +35,65 @@ export default function AddProducts() {
     reset,
   } = useForm({
     defaultValues: {
-      fullname:
-        `${userData?.firstName ?? ""} ${userData?.lastName ?? ""}`.trim() ||
-        null,
+      fullname: `${userData?.firstName ?? ""} ${userData?.lastName ?? ""}`.trim() || null,
     },
   });
 
-  const onSubmit = async (data) => {
+  // Populate form fields with vehicle data if editing
+  useEffect(() => {
+    if (data && data.vehicle) {
+      const vehicle = data.vehicle;
+      Object.keys(vehicle).forEach((key) => {
+        setValue(key, vehicle[key]);
+      });
+      setUploadedImagesFetched(data?.vehicle?.uploadedImages);
+    }
+  }, [data, setValue]);
+
+  // Show loading or error toast notifications based on upload state
+  useEffect(() => {
+    if (formLoading) {
+      toast.info("Submitting, please wait...", { position: "top-center" });
+    }
+    if (isLoading) {
+      toast.info("Uploading...", { position: "top-center" });
+    } else if (error) {
+      toast.error(error.error, { position: "top-center" });
+    }
+  }, [isLoading, error, formLoading]);
+
+  // Handle form submission
+  const onSubmit = async (formData) => {
     const imageUrls = uploadedImages.map((imageObj) => imageObj.url);
     if (imageUrls.length === 0) {
-      toast.warning("Please add images", { position: "top-center" });
-      return; // Exit the function if no images are present
+      toast.warning("Please add images", { position: "top-center", duration: 500 });
+      return;
     }
-    const formData = {
-      ...data,
+
+    const dataToSubmit = {
+      ...formData,
       userId,
       uploadedImages: imageUrls,
     };
-    setFormLoading(true); // Start loading
-    try {
-      const res = await axios.post("/api/add-vehicle", formData);
+    setFormLoading(true);
 
-      if (res.status === 201) {
-        toast.success("Vehicle added successfully!", {
-          position: "top-center",
-          onAutoClose: 2000,
-        });
-        reset(); // Clear the form on successful submit
-        dispatch(clearUploadedImages());
+    try {
+      const res = id
+        ? await axios.put(`/api/update-vehicle?id=${id}`, dataToSubmit) // Edit vehicle if `id` exists
+        : await axios.post("/api/add-vehicle", dataToSubmit); // Add vehicle otherwise
+
+      if (res.status === 201 || res.status === 200) {
+        toast.success("Vehicle saved successfully!", { position: "top-center", duration: 4000 });
+        if (!id) {
+          reset();
+          dispatch(clearUploadedImages());
+        }
       }
     } catch (error) {
-      toast.error("Failed to add vehicle. Please try again.", {
-        position: "top-center",
-      });
+      toast.error("Failed to save vehicle. Please try again.", { position: "top-center" });
       console.error("Error:", error);
     } finally {
-      setFormLoading(false); // End loading after request completion
+      setFormLoading(false);
     }
   };
 
@@ -88,12 +101,15 @@ export default function AddProducts() {
     <Dashboardlayout>
       <div className="flex justify-start">
         <h2 className="scroll-m-20 border-b px-7 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Add your vehicle
+          {id ? "Edit your vehicle" : "Add your vehicle"}
         </h2>
       </div>
 
-      {/*vehicle add  form */}
+      {/* Pass props to vehicle form component */}
       <VehicleAddForm
+      control={control}
+        uploadedImagesFetched={uploadedImagesFetched}
+        id={id}
         formLoading={formLoading}
         register={register}
         errors={errors}

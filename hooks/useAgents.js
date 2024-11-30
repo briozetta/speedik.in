@@ -36,7 +36,7 @@ export const useAgents = () => {
   const next = () => fetchUsers();
 
   // # Refresh users without resetting page counter unnecessarily
-  const handleRefresh = () => fetchUsers(true); // Removed useCallback
+  const handleRefresh = () => fetchUsers(true); 
 
   // # Trigger fetchUsers when userFilter change
   useEffect(() => {
