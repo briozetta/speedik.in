@@ -15,10 +15,10 @@ export async function GET(request) {
     await connectDatabase();
 
     // Get skip, limit, and carFilter from query parameters
-    const queryParams = request.nextUrl.searchParams;
-    const skip = Number(queryParams.get("skip")) || 0;
-    const limit = Number(queryParams.get("limit")) || 4;
-    const carFilter = queryParams.get("carFilter");
+  
+    const skip = 0;
+    const limit =  4;
+    const carFilter = "Four-Wheeler";
 
     // Build the query object
     const query = {

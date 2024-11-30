@@ -1,4 +1,3 @@
-"use client"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -18,10 +17,7 @@ export const useVehicles = () => {
 
     setLoading(true);
     const { data } = await axios.get(
-    `/api/get-my-veichicle?limit=${limit}
-    &skip=${reset ? 0 : limit * page}&carFilter=${carFilter}`,{
-        cache: "no-store",
-      }
+      `/api/get-my-veichicle?limit=${limit}&skip=${reset ? 0 : limit * page}&carFilter=${carFilter}`
     );
     const activeVehicles = data.vehicles.filter((vehicle) => !vehicle.disabled);
     if (reset) {
