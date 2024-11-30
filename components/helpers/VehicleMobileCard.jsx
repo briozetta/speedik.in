@@ -1,0 +1,47 @@
+import Image from "next/image";
+import { IoMdBookmark } from "react-icons/io";
+import { FaGasPump } from "react-icons/fa";
+import { TbManualGearbox } from "react-icons/tb";
+
+export default function VehicleMobileCard({ car }) {
+  return (
+    <div className="border rounded-lg mb-3 shadow-sm overflow-hidden hover:shadow-md transition-shadow flex bg-white">
+      {/* Image Section */}
+      <div className="relative flex-shrink-0 w-[38%]">
+        <Image
+          src={car.image}
+          alt={car.model}
+          width={200}
+          height={150}
+          className="w-full h-full object-fill"
+        />
+        <button className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition">
+          <IoMdBookmark className="text-emerald-500 text-base" />
+        </button>
+      </div>
+
+      {/* Details Section moved to the right */}
+      <div className="flex-grow p-4">
+        {/* Header: Price */}
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-semibold text-emerald-600">
+            ₹ {car.price.toLocaleString()}
+          </h3>
+        </div>
+
+        {/* Model */}
+        <h4 className="text-sm font-bold text-gray-800">{car.model}</h4>
+
+        {/* Fuel & Transmission */}
+        <div className="flex items-center text-xs text-gray-500 mt-1">
+          <FaGasPump className="text-emerald-500 mr-1" /> {car.fuel}
+          <span className="mx-2">|</span>
+          <TbManualGearbox className="text-emerald-500 mr-1" /> {car.transmission}
+        </div>
+
+        {/* Location */}
+        <div className="text-xs text-gray-500 mt-2">Arayedathupalam</div>
+      </div>
+    </div>
+  );
+}

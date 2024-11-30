@@ -2,6 +2,7 @@ import React from 'react';
 import VehicleCard from '../helpers/VehicleCard';
 import car from "@/public/assets/car.webp";
 import pickup from "@/public/assets/pickup.jpg";
+import VehicleMobileCard from '../helpers/VehicleMobileCard';
 
 export default function VehicleCardList() {
   const cars = [
@@ -140,10 +141,15 @@ export default function VehicleCardList() {
   ];
 
     return (
-      <div className="container mx-auto px-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="sm:container mx-auto sm:px-4">
+      <div className="sm:grid hidden sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {cars.map((car, index) => (
           <VehicleCard key={index} car={car} />
+        ))}
+      </div>
+      <div className="sm:hidden ">
+        {cars.map((car, index) => (
+          <VehicleMobileCard key={index} car={car} />
         ))}
       </div>
     </div>
