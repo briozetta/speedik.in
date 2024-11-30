@@ -5,6 +5,7 @@ import SmoothScrollProvider from "@/components/helpers/SmoothScrollProvider";
 import ClientWrapper from "@/redux/ClientWrapper";
 import AuthProvider from "@/context/AuthProvider";
 import { Toaster } from "sonner";
+import { Suspense } from "react";
 
 
 const poppins = Poppins({
@@ -26,7 +27,9 @@ export default function RootLayout({ children }) {
         <ClientWrapper>
           <SmoothScrollProvider>
             <nav className=" sm:padding-x shadow-lg shadow-slate-100"> <DynamicNavbar /></nav>
+            <Suspense>
             {children}
+            </Suspense>
           </SmoothScrollProvider>
         </ClientWrapper>
         </AuthProvider>
