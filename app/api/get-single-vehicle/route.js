@@ -2,6 +2,7 @@ import { connectDatabase } from "@/lib/database";
 import Vehicle from "@/lib/database/models/Vehicle.model";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
 export async function GET(request) {
   try {
     const queryParams = request.nextUrl.searchParams;

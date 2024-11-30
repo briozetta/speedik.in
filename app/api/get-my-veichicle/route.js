@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import Vehicle from "@/lib/database/models/Vehicle.model";
 
+export const dynamic = "force-dynamic";
 export async function GET(request) {
   try {
     const session = await getServerSession(authOptions);
@@ -15,10 +16,10 @@ export async function GET(request) {
     await connectDatabase();
 
     // Get skip, limit, and carFilter from query parameters
-  
-    const skip = 0;
-    const limit =  4;
-    const carFilter = "Four-Wheeler";
+    const queryParams = request.nextUrl.searchParams;
+    const skip = Number(queryParams.get("skip")) || 0;
+    const limit = Number(queryParams.get("limit")) || 4;
+    const carFilter = queryParams.get("carFilter");
 
     // Build the query object
     const query = {
