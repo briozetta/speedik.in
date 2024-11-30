@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import { connection } from 'next/server'
 const limit = 6;
 
 export const useVehicles = () => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [vehicles, setVehicles] = useState([]); // #Renamed users to vehicles
+  const [vehicles, setVehicles] = useState([]); 
   const { carFilter } = useSelector((state) => state.carFilters);
 
   // # Fetch vehicles with pagination
@@ -16,7 +16,7 @@ export const useVehicles = () => {
     if (loading) return; // Prevent multiple calls
 
     setLoading(true);
-
+    await connection()
     const { data } = await axios.get(
       `/api/get-my-veichicle?limit=${limit}&skip=${reset ? 0 : limit * page}&carFilter=${carFilter}`
     );
