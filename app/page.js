@@ -1,5 +1,9 @@
+import FullScreenLoader from '@/components/ui/SkeletonLoadings/FullScreenLoader';
+import dynamic from 'next/dynamic';
 
-import HomeSection from '@/components/shared/HomeSection';
+const HomeSection = dynamic(() => import('@/components/shared/HomeSection'), {
+  loading: () => <FullScreenLoader/>, // Optional: A fallback loader
+});
 const Page = () => {
   return (
     <main >
