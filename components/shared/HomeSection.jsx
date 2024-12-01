@@ -10,9 +10,9 @@ import { TooltipContent, Tooltip, TooltipTrigger, TooltipProvider } from "../ui/
 
 export default function HomeSection() {
   const vehicleTypes = [
-    { category: "Four Wheeler", icon: FaCar },
-    { category: "Two Wheeler", icon: RiEBikeFill },
-    { category: "Commercial Vehicles", icon: CiDeliveryTruck },
+    { category: "Four Wheeler", icon: FaCar,filter:"Four-Wheeler" },
+    { category: "Two Wheeler", icon: RiEBikeFill ,filter:"Two-Wheeler" },
+    { category: "Commercial Vehicles", icon: CiDeliveryTruck,filter:"Commercial Vehicle"  },
   ];
   
   const words = ["Select Your Vehicle", "View Details", "Contact"];
@@ -20,13 +20,13 @@ export default function HomeSection() {
   return (
     <div className="relative">
       {/* Banner Image */}
-      <Image
-        src={banner3}
-        alt="banner"
-        
+      <video
+        src="/assets/homeVideo.mp4"
+        autoPlay
+        loop
+        muted
         className="h-screen w-full object-cover"
-        placeholder="blur"
-      />
+      ></video>
 
       {/* Overlay Content */}
       <div className="absolute inset-0 flex flex-col justify-center sm:items-start padding-x text-white px-4">
@@ -48,7 +48,10 @@ export default function HomeSection() {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link
-                      href={'/vehicle-list'}
+                      href={{
+                        pathname:'/vehicle-list',
+                        query:{id:vehicle.filter}
+                      }}
                       className="flex-1 hover:bg-gray-200 duration-300 cursor-pointer transition 
                         rounded-full flex items-center px-6 py-4 border-b sm:border-b-0 sm:border-r 
                         border-gray-200"

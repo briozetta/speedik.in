@@ -1,15 +1,17 @@
+import FullScreenLoader from '@/components/ui/SkeletonLoadings/FullScreenLoader';
+import dynamic from 'next/dynamic';
+import React from 'react';
 
-import Advertisement from '@/components/shared/Advertisement';
-import VehicleCardList from '@/components/shared/VehicleCardList';
-import SearchAndFilter from '@/components/shared/SearchAndFilter';
+const VehicleListings = dynamic(() => import('@/components/shared/VehiclceListings'), {
+  loading: () => <FullScreenLoader/>, // Optional: A fallback loader
+});
 
 export default function Page() {
   return (
-    <main className='bg-[#050B20]'>
-      <section className='mt-10'><SearchAndFilter/></section>
-      <section className=' bg-white mb-6 padding-x'>
-      <VehicleCardList/>
+    <main>
+      <section>
+        <VehicleListings />
       </section>
-    </main> 
+    </main>
   );
 }

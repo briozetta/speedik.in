@@ -6,24 +6,25 @@ import { FaGasPump } from "react-icons/fa";
 import Link from "next/link";
 import { Separator } from "../ui/separator";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import { TbManualGearbox } from "react-icons/tb";
+import { TbCalendar } from "react-icons/tb";
 
-export default function VehicleCard({ car }) {
+export default function VehicleCard({ vehicle }) {
+  
   return (
     <div className="bg-white rounded-lg shadow-sm border rounded-t-xl overflow-hidden ">
       {/* Car Image */}
       <div className="relative w-full h-52">
         <Image
-          src={car.image}
-          alt={car.model}
+          src={vehicle.uploadedImages[0]}
+          alt={vehicle.model}
           fill 
           sizes="(min-width: 808px) 50vw, 100vw"
-          placeholder="blur"
+         
           className="rounded-t-xl"
         />
         {/* Price Tag */}
         <div className="absolute top-2 left-2 bg-emerald-600 text-white px-3 py-1 rounded-full text-sm">
-          {car.tag}
+          {vehicle.brand} 
         </div>
         {/* Save Button */}
         <button className="absolute top-2 right-2 bg-white rounded-full p-2 shadow">
@@ -34,24 +35,24 @@ export default function VehicleCard({ car }) {
       <div className="p-3 px-6">
         {/* Car Details */}
         <div>
-          <h3 className="text-lg font-normal">{car.model}</h3>
+          <h3 className="text-lg font-normal">{vehicle.brand} {vehicle.model}</h3>
           <p className="text-gray-500 text-[14px] py-1 pb-2">
-            {car.description}
+            {vehicle.colour}
           </p>
           <Separator />
 
           <div className="flex items-center justify-between my-4 space-x-4">
             <div className="flex flex-col gap-1 items-center space-x-1">
               <IoMdCar className="text-gray-600 w-5 h-5" />
-              <span className="text-gray-600 text-sm">{car.mileage} Miles</span>
+              <span className="text-gray-600 text-sm">{vehicle.kilometers} km</span>
             </div>
             <div className="flex flex-col gap-1 items-center space-x-1">
               <FaGasPump className="text-gray-600 w-5 h-5" />
-              <span className="text-gray-600 text-sm">{car.fuel}</span>
+              <span className="text-gray-600 text-sm">{vehicle.fuelType}</span>
             </div>
             <div className="flex flex-col gap-1 items-center space-x-1">
-              <TbManualGearbox className="text-gray-600 w-5 h-5" />
-              <span className="text-gray-600 text-sm">{car.transmission}</span>
+              <TbCalendar className="text-gray-600 w-5 h-5" />
+              <span className="text-gray-600 text-sm">{vehicle.year}</span>
             </div>
           </div>
           <Separator />
@@ -59,7 +60,7 @@ export default function VehicleCard({ car }) {
 
         {/* Price and Link */}
         <div className="my-2 mt-3 flex justify-between items-center">
-          <span className="text-xl text-gray-700 font-semibold">₹{car.price}</span>
+          <span className="text-xl text-gray-700 font-semibold">₹{vehicle.price}</span>
           <Link
             href={"/vehicle-details"}
             className="text-blue-600 flex gap-1 justify-center items-center hover:text-blue-800 text-sm"

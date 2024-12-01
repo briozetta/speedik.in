@@ -7,6 +7,7 @@ import { LuLoader2 } from "react-icons/lu";
 import {Select,SelectContent,SelectGroup,SelectItem,SelectTrigger,
 } from "@/components/ui/select";
 import FileUploader from "./FileUploader";
+import { districtsInKerala } from "@/lib/contants";
 
 export default function VehicleAddForm({id,
   uploadedImagesFetched,setValue,formLoading,onSubmit,
@@ -18,6 +19,7 @@ export default function VehicleAddForm({id,
    const transmissionType = watch("transmissionType", "Select Transmission Type");
    const ownership = watch("ownership", "Select Ownership");
    const condition = watch("condition", "Select Condition");
+   const district = watch("district", "Select the district");
 
   return (
     <form
@@ -279,6 +281,50 @@ export default function VehicleAddForm({id,
           {errors.secondaryContact && (
             <span className="text-red-600">
               {errors.secondaryContact.message}
+            </span>
+          )}
+        </div>
+      </div>
+
+       {/* select your distict and your place*/}
+      
+       <div className="flex w-full gap-4">
+      <div className="relative flex-1">
+          <Select
+            onValueChange={(value) => setValue("district", value)}
+            {...register("district", { required: "district is required" })}
+          >
+            <SelectTrigger>
+              <Label className="text-emerald-600">{district}</Label>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {districtsInKerala.map((dist,index)=>(
+                  <SelectItem value={dist} key={index}>{dist}</SelectItem>
+                ))}
+                
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          {errors.condition && (
+            <span className="text-red-600">{errors.district.message}</span>
+          )}
+        </div>
+
+        <div className="relative flex-1">
+          <FloatingInput
+            id="place"
+            type="text"
+            {...register("place", {
+              
+            })}
+          />
+          <FloatingLabel htmlFor="place">
+            Add place / optional
+          </FloatingLabel>
+          {errors.place && (
+            <span className="text-red-600">
+              {errors.place.message}
             </span>
           )}
         </div>

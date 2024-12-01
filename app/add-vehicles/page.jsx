@@ -9,9 +9,7 @@ export default function Page() {
 
   return (
     <div>
-    
         <AddProducts id={id} />
-    
     </div>
   );
 }
