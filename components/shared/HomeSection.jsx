@@ -19,30 +19,37 @@ export default function HomeSection() {
 
   return (
     <div className="relative">
-      {/* Banner Image */}
+       {/* <Image
+        src={banner3}
+        alt="banner"
+        
+        className="h-screen w-full object-cover"
+        placeholder="blur"
+      /> */}
+      {/* Banner video */}
       <video
         src="/assets/homeVideo.mp4"
         autoPlay
         loop
         muted
-        className="h-screen w-full object-cover"
+        className="h-screen w-full object-fill sm:object-cover"
       ></video>
 
       {/* Overlay Content */}
       <div className="absolute inset-0 flex flex-col justify-center sm:items-start padding-x text-white px-4">
-        <p className="mt-4 sm:mt mb-6 text-lg ">
+        <p className="mt-4 sm:mt mb-6 text-base sm:text-lg opacity-80">
           Find the perfect vehicle for your next drive.
         </p>
-        <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold">
-          Drive Your Journey with{" "}
-          <span className="bg-gradient-to-r from-emerald-600 to-green-300 bg-clip-text text-transparent">
+        <h1 className="text-[44px] leading-[48px] md:text-5xl xl:text-6xl opacity-80 font-bold">
+          Pick Your Vehicle with{" "}
+          <span className="bg-gradient-to-r from-emerald-600 opacity-100 to-green-300 bg-clip-text text-transparent">
             Gaadi9
           </span>
         </h1>
 
         {/* Search Bar */}
-        <div className="flex items-center justify-start mt-8 p-2 bg-white shadow-lg sm:pb-2 pb-4 rounded-3xl">
-          <div className="flex flex-col sm:flex-row items-center w-full max-w-[85rem] px-5 bg-white sm:rounded-full overflow-hidden">
+        <div className="flex items-center justify-start mt-8 p-2  shadow-lg sm:pb-2 pb-4 rounded-3xl">
+          <div className="flex flex-col sm:flex-row items-center opacity-95 rounded-3xl w-full max-w-[85rem] px-5 bg-white sm:rounded-xl p-1 overflow-hidden">
             {vehicleTypes.map((vehicle, index) => (
               <TooltipProvider key={index}>
                 <Tooltip>
