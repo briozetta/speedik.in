@@ -1,13 +1,8 @@
 import React from 'react';
+import VehicleCard from '../helpers/VehicleCard';
 import VehicleMobileCard from '../helpers/VehicleMobileCard';
-import FullScreenLoader from '../ui/SkeletonLoadings/FullScreenLoader';
-import dynamic from 'next/dynamic';
-const VehicleCard = dynamic(() => import('@/components/helpers/VehicleCard'), {
-  loading: () => <FullScreenLoader/>, // Optional: A fallback loader
-});
 
 export default function VehicleCardList({vehicles}) {
-  
 
     return (
       <div className="sm:container mx-auto sm:px-4">
