@@ -5,19 +5,17 @@ import { TbManualGearbox } from "react-icons/tb";
 
 export default function VehicleMobileCard({ car }) {
   return (
-    <div className="border rounded-lg mb-3 shadow-sm overflow-hidden hover:shadow-md transition-shadow flex bg-white">
+    <div className="border rounded-lg mb-4 shadow-sm overflow-hidden hover:shadow-md transition-shadow flex bg-white">
       {/* Image Section */}
-      <div className="relative flex-shrink-0 w-[38%]">
+      <div className="relative flex-shrink-0 w-[45%]">
         <Image
           src={car.image}
           alt={car.model}
-          width={200}
-          height={150}
-          className="w-full h-full object-fill"
+          width={250}
+          height={180}
+          className="w-full h-full object-cover"
         />
-        <button className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition">
-          <IoMdBookmark className="text-emerald-500 text-base" />
-        </button>
+       
       </div>
 
       {/* Details Section moved to the right */}
