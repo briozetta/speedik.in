@@ -30,7 +30,7 @@ export default function HomeSection() {
 
       {/* Overlay Content */}
       <div className="absolute inset-0 flex flex-col justify-center sm:items-start padding-x text-white px-4">
-        <p className="mt-4 sm:mt mb-6 text-lg">
+        <p className="mt-4 sm:mt mb-6 text-lg ">
           Find the perfect vehicle for your next drive.
         </p>
         <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold">

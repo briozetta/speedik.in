@@ -1,6 +1,6 @@
 "use client";
 import Advertisement from "@/components/shared/Advertisement";
-import VehicleCardList from "@/components/shared/VehicleCardList";
+
 import SearchAndFilter from "@/components/shared/SearchAndFilter";
 import { useSearchParams } from "next/navigation";
 import InfiniteScroll from "@/components/ui/infinite-scroll";
@@ -8,6 +8,11 @@ import { useVehiclesByQuery } from "@/hooks/useVehiclesByQuery";
 import { useDispatch } from "react-redux";
 import { setCarFilter } from "@/redux/slices/carFilterDashboad";
 import { Loader2 } from "lucide-react";
+import FullScreenLoader from "../ui/SkeletonLoadings/FullScreenLoader";
+import dynamic from "next/dynamic";
+const VehicleCardList = dynamic(() => import('@/components/shared/VehicleCardList'), {
+  loading: () => <FullScreenLoader/>, // Optional: A fallback loader
+});
 
 export default function VehiclceListings() {
   const searchParams = useSearchParams();
