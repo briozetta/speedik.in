@@ -1,8 +1,10 @@
 import React from 'react';
-import VehicleCard from '../helpers/VehicleCard';
-import car from "@/public/assets/car.webp";
-import pickup from "@/public/assets/pickup.jpg";
 import VehicleMobileCard from '../helpers/VehicleMobileCard';
+import FullScreenLoader from '../ui/SkeletonLoadings/FullScreenLoader';
+import dynamic from 'next/dynamic';
+const VehicleCard = dynamic(() => import('@/components/helpers/VehicleCard'), {
+  loading: () => <FullScreenLoader/>, // Optional: A fallback loader
+});
 
 export default function VehicleCardList({vehicles}) {
   
