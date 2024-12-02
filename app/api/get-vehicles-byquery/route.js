@@ -5,9 +5,6 @@ import Vehicle from "@/lib/database/models/Vehicle.model";
 export const dynamic = "force-dynamic";
 export async function GET(request) {
   try {
-    
-
-
     await connectDatabase();
 
     // Get skip, limit, and carFilter from query parameters
