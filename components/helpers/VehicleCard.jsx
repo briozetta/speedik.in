@@ -62,7 +62,10 @@ export default function VehicleCard({ vehicle }) {
         <div className="my-2 mt-3 flex justify-between items-center">
           <span className="text-xl text-gray-700 font-semibold">₹{vehicle.price}</span>
           <Link
-            href={"/vehicle-details"}
+            href={{
+              pathname:"/vehicle-details",
+              query: { id: vehicle._id },
+            }}
             className="text-blue-600 flex gap-1 justify-center items-center hover:text-blue-800 text-sm"
           >
             View Details <IoIosArrowRoundForward className="-rotate-45" size={22} />

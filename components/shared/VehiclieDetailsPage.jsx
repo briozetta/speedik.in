@@ -1,18 +1,18 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import car from "@/public/assets/car.webp";
-import pickup from "@/public/assets/pickup.jpg";
 import CarouselButton from "../helpers/CarouselButton";
 import VehcicleShortOverview from "../helpers/VehcicleShortOverview";
 import { FaCalendarAlt, FaTachometerAlt, FaCogs, FaGasPump } from 'react-icons/fa';
 import { IoMdPricetags } from 'react-icons/io';
 import Link from 'next/link';
 
-export default function VehicleDetailsPage() {
+export default function VehicleDetailsPage({agentData}) {
     const [currentImage, setCurrentImage] = useState(0);
-    const carImages = [car, pickup];
-
+    const carImages = agentData?.vehicle?.uploadedImages
+    ? [...agentData.vehicle.uploadedImages]
+    : [];
+   
     const changeImage = (direction) => {
         setCurrentImage((prev) =>
             direction === "next"
@@ -21,21 +21,11 @@ export default function VehicleDetailsPage() {
         );
     };
 
-    const carDetails = {
-        model: 'Toyota Camry New',
-        description: '3.5 D5 PowerPulse Momentum 5dr AWD Geartronic Estate',
-        year: '2023',
-        mileage: '20',
-        fuel: 'Petrol',
-        transmission: 'Automatic',
-        price: '40,000',
-    };
-
     const features = [
-        { icon: FaCalendarAlt, value: carDetails.year, label: "Year" },
-        { icon: FaTachometerAlt, value: `${carDetails.mileage} miles`, label: "Mileage" },
-        { icon: FaCogs, value: carDetails.transmission, label: "Transmission" },
-        { icon: FaGasPump, value: carDetails.fuel, label: "Fuel" }
+        { icon: FaCalendarAlt, value: agentData?.vehicle?.year, label: "Year" },
+        { icon: FaTachometerAlt, value: `${agentData?.vehicle?.kilometers} km`, label: "Mileage" },
+        { icon: FaCogs, value: agentData?.vehicle?.transmissionType, label: "Transmission" },
+        { icon: FaGasPump, value: agentData?.vehicle?.fuelType, label: "Fuel" }
     ];
 
     return (
@@ -48,19 +38,18 @@ export default function VehicleDetailsPage() {
                         <span className="hover:underline text-blue-500 cursor-pointer">Home</span>
                     </Link>
                     {' / '}
-                    <Link href="/listings" passHref>
+                    
                         <span className="hover:underline cursor-pointer">Listings</span>
-                    </Link>
+                  
                     {' / '}
-                    <span className="text-gray-900">{carDetails.model}</span>
+                    <span className="text-gray-900">{agentData?.vehicle.model}</span>
                 </div>
 
                 {/* Title and Description */}
                 <div className="flex flex-col md:flex-row justify-between items-start">
                     <div>
-                        <h2 className="text-4xl font-medium text-gray-900">{carDetails.model}</h2>
-                        <p className="text-gray-500 text-sm mt-2">{carDetails.description}</p>
-
+                        <h2 className="text-4xl font-medium text-gray-900">{agentData?.vehicle?.brand} {agentData?.vehicle?.model}</h2>
+                        
                         {/* Features */}
                         <div className="flex flex-wrap mt-4 gap-2">
                             {features.map((feature, index) => (
@@ -78,10 +67,10 @@ export default function VehicleDetailsPage() {
 
                     {/* Price and Action buttons */}
                     <div className="sm:flex hidden sm:flex-row md:flex-col items-start md:items-end mt-6 md:mt-0 w-full md:w-auto">
-                        <div className="text-3xl font-semibold text-gray-900 mb-2">₹{carDetails.price}</div>
+                        <div className="text-3xl font-semibold text-gray-900 mb-2">₹{agentData?.vehicle?.price}</div>
                         <div className="text-sm text-gray-500 flex items-center">
                             <IoMdPricetags className="mr-1 text-gray-500" />
-                            <span>Make An Offer Price</span>
+                            <span>Make An Offer / contact now</span>
                         </div>
                     </div>
                 </div>
@@ -89,23 +78,24 @@ export default function VehicleDetailsPage() {
 
             {/* Image carousel and details section */}
             <div className="flex justify-center px-4 items-center bg-gray-50">
-                <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden max-w-7xl w-full">
+                <div className="flex flex-col md:flex-row 0 shadow-lg rounded-lg overflow-hidden max-w-7xl w-full">
                     {/* Image Carousel */}
                     <div className="w-full lg:w-2/3 relative">
                         <Image
                             src={carImages[currentImage]}
-                            placeholder="blur"
+                            width={500}
+                            height={500}
                             alt="Car"
-                            className="w-full h-full object-cover"
+                         className="w-full h-[400px] sm:h-[500px] object-fill sm:object-cover"
                         />
                         {/* Left/Right buttons */}
                         <CarouselButton onClick={() => changeImage("prev")} direction="left" />
                         <CarouselButton onClick={() => changeImage("next")} direction="right" />
                     </div>
-
+                         
                     {/* Car Details */}
                     <div className="w-full md:w-1/2 p-6">
-                        <VehcicleShortOverview />
+                        <VehcicleShortOverview  agentData={agentData?.vehicle}/>
                     </div>
                 </div>
             </div>

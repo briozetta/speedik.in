@@ -40,7 +40,9 @@ export default function HomeSection() {
         <p className="mt-4 sm:mt mb-6 text-base sm:text-lg opacity-80">
           Find the perfect vehicle for your next drive.
         </p>
-        <h1 className="text-5xl md:text-5xl lg:text-6xl font-semibold max-w-7xl relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 via-neutral-100 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
+        <h1 className="text-5xl md:text-5xl lg:text-6xl font-semibold max-w-7xl relative z-20 bg-clip-text
+         text-transparent bg-gradient-to-b from-neutral-100 via-neutral-200 to-neutral-700
+          dark:from-neutral-500 dark:via-white dark:to-white">
           Pick Your Vehicle with{" "}
           <span className="bg-gradient-to-r from-emerald-600 opacity-100  to-green-300 bg-clip-text text-transparent">
             Gaadi9

@@ -3,8 +3,7 @@ import {
   FaTachometerAlt,
   FaGasPump,
   FaCalendarAlt,
-  FaCogs,
-  FaRoad,
+  FaMoneyCheck,
 } from "react-icons/fa";
 import { BsPerson } from "react-icons/bs";
 import { GiGearStickPattern } from "react-icons/gi";
@@ -13,28 +12,59 @@ import {
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaArrowRight,
+  FaRegSmile,
 } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-
-const VehicleOverview = () => {
+const VehicleOverview = ({ agentData }) => {
   const carDetails = [
-    { icon: FaCarSide, label: "Body", value: "SUV" },
-    { icon: FaTachometerAlt, label: "Mileage", value: "28,000 miles" },
-    { icon: FaGasPump, label: "Fuel Type", value: "Petrol" },
-    { icon: FaCalendarAlt, label: "Year", value: "2023" },
-    { icon: GiGearStickPattern, label: "Transmission", value: "Automatic" },
+    {
+      icon: FaCarSide,
+      label: "Type",
+      value: `${agentData?.vehicle?.brand} ${agentData?.vehicle?.model}`,
+    },
+    {
+      icon: FaTachometerAlt,
+      label: "Km driven",
+      value: agentData?.vehicle?.kilometers,
+    },
+    {
+      icon: FaGasPump,
+      label: "Fuel Type",
+      value: agentData?.vehicle?.fuelType,
+    },
+    { icon: FaCalendarAlt, label: "Year", value: agentData?.vehicle?.year },
+    {
+      icon: GiGearStickPattern,
+      label: "Transmission",
+      value: agentData?.vehicle?.transmissionType,
+    },
     {
       icon: MdOutlineDriveEta,
-      label: "Drive Type",
-      value: "Front Wheel Drive",
+      label: "Type",
+      value: agentData?.vehicle?.vehicleType,
     },
-    { icon: BsPerson, label: "Condition", value: "Used" },
-    { icon: FaCogs, label: "Engine Size", value: "4.8L" },
-    { icon: MdOutlineColorLens, label: "Color", value: "Blue" },
-    { icon: FaRoad, label: "Doors", value: "5-door" },
-    { icon: FaCogs, label: "Cylinders", value: "6" },
+    {
+      icon: BsPerson,
+      label: "Condition",
+      value: agentData?.vehicle?.condition,
+    },
+    {
+      icon: FaRegSmile,
+      label: "Ownership",
+      value: agentData?.vehicle?.ownership,
+    },
+    {
+      icon: MdOutlineColorLens,
+      label: "Color",
+      value: agentData?.vehicle?.colour,
+    },
+    {
+      icon: FaMoneyCheck,
+      label: "expected price ₹",
+      value: agentData?.vehicle?.price,
+    },
   ];
 
   return (
@@ -78,9 +108,13 @@ const VehicleOverview = () => {
          w-12 my-2 rounded-full mr-4 shadow-md"
             />
             <div>
-              <h3 className="text-xl font-semibold py-3">Volvo Cars Marin</h3>
+              <h3 className="text-xl font-semibold py-3">
+                {agentData?.agent?.firstName && agentData?.agent?.lastName
+                  ? `${agentData.agent.firstName} ${agentData.agent.lastName}`
+                  : agentData?.vehicle?.fullname}
+              </h3>
               <p className="text-gray-600">
-                619 Francisco Blvd E, San Rafael, CA 94901
+                Enquire with this seller to make a deal.
               </p>
             </div>
           </div>
@@ -91,7 +125,7 @@ const VehicleOverview = () => {
                 className="flex gap-1 items-center justify-center"
               >
                 <FaMapMarkerAlt className="text-blue-500" />
-                Get Directions
+                {agentData?.vehicle?.district}
               </Button>
             </div>
             <div className="flex items-center text-xs">
@@ -100,7 +134,7 @@ const VehicleOverview = () => {
                 className="flex gap-1 items-center justify-center"
               >
                 <FaPhoneAlt className="text-blue-500" />
-                +76 956 039 967
+                +91 {agentData?.vehicle?.primaryContact}
               </Button>
             </div>
           </div>

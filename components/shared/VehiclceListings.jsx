@@ -11,7 +11,7 @@ import { Loader2 } from "lucide-react";
 import FullScreenLoader from "../ui/SkeletonLoadings/FullScreenLoader";
 import dynamic from "next/dynamic";
 const VehicleCardList = dynamic(() => import('@/components/shared/VehicleCardList'), {
-  loading: () => <FullScreenLoader/>, // Optional: A fallback loader
+  loading: () => <FullScreenLoader/>, 
 });
 
 export default function VehiclceListings() {

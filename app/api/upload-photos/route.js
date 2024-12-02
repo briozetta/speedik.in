@@ -18,7 +18,7 @@ async function uploadToDigitalOcean(fileBuffer, originalFilename, mimetype) {
   const ext = parts[parts.length - 1];
   const newFilename = `${Date.now()}.${ext}`;
   const bucket = 'gaadi9loofee'; // Replace with your Space name
-  const folder = 'loofee-storage'; // Folder in the Space
+  const folder = 'Gaadi9'; // Folder in the Space
 
   try {
     // Upload file to DigitalOcean Space
