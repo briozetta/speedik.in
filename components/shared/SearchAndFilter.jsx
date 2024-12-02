@@ -23,7 +23,7 @@ export default function SearchAndFilter() {
             <span className="text-blue-500">Vehicle</span> / Listing
           </h4>
           <h1 className="font-bold text-2xl sm:text-4xl mt-2">
-            Pick Your Vehicle {vehicleFilter}
+            Pick Your Vehicle 
           </h1>
         </header>
         <div className="mt-12 flex justify-between gap-6">
