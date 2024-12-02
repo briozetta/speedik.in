@@ -1,5 +1,5 @@
 import useSWR, { mutate } from 'swr';
-import { DisableVehicle } from "@/components/helpers/dashboard-helper/DisableVehicle.jsx";
+import { DisableVehicleandUser } from "@/components/helpers/dashboard-helper/DisableVehicleandUser.jsx";
 import {
   MoreHorizontal,
   Badge,
@@ -81,7 +81,7 @@ export default function DisabledVehicleListing() {
                     <DropdownMenuItem>Edit</DropdownMenuItem>
                   </Link>
                   <DropdownMenuItem asChild>
-                    <DisableVehicle
+                    <DisableVehicleandUser
                     enableVehicle={false}
                       vehicleId={vehicle._id}
                       handleRefreshDisabled={handleFetchData}

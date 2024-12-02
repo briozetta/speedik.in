@@ -12,7 +12,9 @@ export async function GET(request) {
     const skip = Number(queryParams.get("skip")) || 0;
     const limit = Number(queryParams.get("limit")) || 4;
     const carFilter = queryParams.get("carFilter");
+    const vehicleFilter = queryParams.get("vehicleFilter");
 
+  console.log(vehicleFilter);
   
     // Build the query object
     const query = {
@@ -29,7 +31,7 @@ export async function GET(request) {
 
     // Fetch vehicles based on the query object
     const vehicles = await Vehicle.find(query)
-      .sort({ createdAt: -1  })
+      .sort({createdAt: vehicleFilter === "recentlyAdded" ? -1 : 1   })
       .skip(skip)
       .limit(limit)
       .exec();

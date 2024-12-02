@@ -1,5 +1,5 @@
 // Import
-import { DisableVehicle } from "@/components/helpers/dashboard-helper/DisableVehicle.jsx";
+import { DisableVehicleandUser } from "@/components/helpers/dashboard-helper/DisableVehicleandUser.jsx";
 import { TabsContent, MoreHorizontal, Badge, Button, Card, CardContent, CardDescription, CardHeader, 
   CardTitle, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger 
   ,Table, TableBody, TableCell, TableHead, TableHeader, TableRow  } from "./imports.js";
@@ -103,7 +103,8 @@ export default function VehicleListing({ vehicles,handleRefresh ,selectedValue})
                         pathname:'/add-vehicles',
                         query: { id:vehicle._id  },
                       }}><DropdownMenuItem>Edit</DropdownMenuItem></Link>
-                        <DropdownMenuItem asChild><DisableVehicle vehicleId={vehicle._id} handleRefresh={handleRefresh}/></DropdownMenuItem>
+                        <DropdownMenuItem asChild><DisableVehicleandUser
+                         vehicleId={vehicle._id} handleRefresh={handleRefresh} query={"vehicle"}/></DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>

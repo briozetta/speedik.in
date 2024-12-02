@@ -140,7 +140,7 @@ export const AnimatedTestimonials = ({ testimonials, autoplay = false }) => {
                         className="text-emerald-500 mr-3"
                         size={18}
                       />
-                      <span className="text-2xl font-bold">₹89 Lakh</span>
+                      <span className="text-2xl font-bold">₹{testimonials[active].price}</span>
                     </li>
                   </ul>
                 </div>
@@ -158,11 +158,11 @@ export const AnimatedTestimonials = ({ testimonials, autoplay = false }) => {
                    {testimonials[active].secondaryContact &&  <span className="text-base text-emerald-700 mt-2 block hover:underline transition duration-300">
                       +91 {testimonials[active].secondaryContact}
                     </span>}
-                    <span className="text-base mt-2 flex justify-center items-center">
+                    {testimonials[active].district && <span className="text-base mt-2 flex justify-center items-center">
                       {" "}
                       <FaLocationDot className="text-emerald-500" size={16} />
-                      pulpally
-                    </span>
+                      {testimonials[active].district} {testimonials[active].place || ""}
+                    </span>}
                   </div>
                 </div>
               </div>

@@ -7,16 +7,37 @@ export default function Loginform() {
   const [contact, setContact] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await signIn("credentials", { contact, password, callbackUrl: "/admin/dashboard-home" });
+    setError(""); // Reset any previous error messages
+  
+    // Perform the sign-in attempt
+    const result = await signIn("credentials", {
+      contact,
+      password,
+      redirect: false, // Prevent automatic redirection
+      callbackUrl: "/admin/dashboard-home",
+    });
+  
     setLoading(false);
+  
+    // Check if there's an error from the sign-in result
+    if (result?.error) {
+      setError(result.error); // Set error state to display the error message
+    } else if (result?.url) {
+      // Redirect to the callback URL if sign-in is successful
+      window.location.href = result.url;
+    }
   };
+  
+
   return (
     <>
       <form className="space-y-4" onSubmit={handleFormSubmit}>
+        {error && <p className="text-red-500">{error}</p>}
         <input
           type="text"
           onChange={(e) => setContact(e.target.value)}
@@ -33,12 +54,12 @@ export default function Loginform() {
         <button
           disabled={loading}
           type="submit"
-          className="bg-slate-800 w-full  no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6  text-white inline-block"
+          className="bg-slate-800 w-full no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block"
         >
           <span className="absolute inset-0 overflow-hidden rounded-full">
             <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </span>
-          <div className="relative flex justify-center space-x-2 text-base py-3 items-center z-10 rounded-full bg-zinc-950 px-4 ring-1 ring-white/10 ">
+          <div className="relative flex justify-center space-x-2 text-base py-3 items-center z-10 rounded-full bg-zinc-950 px-4 ring-1 ring-white/10">
             <span>{loading ? "login please wait..." : "Login Securely"}</span>
             <FaKey />
           </div>

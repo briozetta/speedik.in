@@ -1,4 +1,6 @@
 "use client";
+import DisabledAgentsListing from "@/components/shared/dashboard-common/DisabledAgentsListing";
+import { DisableVehicleandUser } from "../dashboard-helper/DisableVehicleandUser";
 import EditAgentForm from "./EditAgentForm";
 // imports
 import {
@@ -12,7 +14,7 @@ import {
 
 const imagex = "https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg";
 
-export default function AgentList() {
+export default function AgentList({selectedValue}) {
   // # Extract users, loading state, hasMore, next, and handleRefresh from useAgents hook
   const { users, loading, hasMore, next, handleRefresh } = useAgents();
   const {searchTerm,} = useSelector((state)=>state.userFilter)
@@ -27,7 +29,7 @@ export default function AgentList() {
     
 
   return (
-    <TabsContent value="all">
+    <TabsContent value={selectedValue}>
       <Card>
         <CardHeader>
           <CardTitle className="flex justify-between">Agents
@@ -72,7 +74,7 @@ export default function AgentList() {
             </TableHeader>
 
             {/* map the users */}
-            <TableBody>
+            {selectedValue === "active"? <TableBody>
               {filteredUsers.length > 0
                 ? filteredUsers.map((user,index) => (
                     <TableRow className="cursor-pointer" key={index}>
@@ -114,7 +116,7 @@ export default function AgentList() {
                           <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuLabel><EditAgentForm userId={user._id} handleRefresh={handleRefresh}/></DropdownMenuLabel>
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                            <DropdownMenuItem asChild><DisableVehicleandUser userId={user._id} handleRefresh={handleRefresh}/></DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>
@@ -127,7 +129,7 @@ export default function AgentList() {
                       </TableCell>
                     </TableRow>
                   )}
-            </TableBody>
+            </TableBody>:<DisabledAgentsListing/>}
           </Table>
 
           {/* passing props to infinite scroll component */}
@@ -145,11 +147,11 @@ export default function AgentList() {
           </InfiniteScroll>
         </CardContent>
 
-        <CardFooter>
+        {selectedValue === "active" && <CardFooter>
           <div className="text-xs text-muted-foreground">
             Total users - <strong>{users.length}</strong>
           </div>
-        </CardFooter>
+        </CardFooter>}
       </Card>
     </TabsContent>
   );

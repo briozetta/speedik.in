@@ -20,10 +20,14 @@ export const authOptions = {
 
         await connectDatabase();
         const user = await User.findOne({ contact });
-
+        if (user.disabled === true) {
+          throw new Error("Your account has been disabled. Please contact support.");
+        }
         // Check if the user exists and the password is correct
         const passwordOk = user && bcrypt.compareSync(password, user.password);
-
+        if (!passwordOk) {
+          throw new Error("Invalid credentional.");
+        }
         if (passwordOk) {
           // Filter out sensitive fields (like password, createdAt, updatedAt) before returning the user
           const { _id, firstName, lastName, contact, role } = user;
@@ -57,5 +61,9 @@ export const authOptions = {
       }
       return session;
     }
+  },
+  pages:{
+    signIn: "/login", 
+    error: "/login",
   }
 };

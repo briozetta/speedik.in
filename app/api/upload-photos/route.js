@@ -38,7 +38,7 @@ async function uploadToDigitalOcean(fileBuffer, originalFilename, mimetype) {
 }
 
 export async function POST(request) {
-  const MAX_FILE_SIZE = 300 * 1024; // Maximum size of each file in bytes (300KB)
+  const MAX_FILE_SIZE = 800 * 1024; // Maximum size of each file in bytes (300KB)
   const ALLOWED_MIME_TYPES = [
     'image/jpeg',  // JPEG
     'image/jpg',   // JPG (older variant, same as JPEG)
@@ -85,7 +85,7 @@ export async function POST(request) {
 
         // Skip the upload if file size exceeds 300KB
         if (fileSize > MAX_FILE_SIZE) {
-          return NextResponse.json({ error: `File size should not exceed 300KB! (${originalFilename})` }, { status: 400 });
+          return NextResponse.json({ error: `File size should not exceed 800KB! (${originalFilename})` }, { status: 400 });
         }
 
         // Upload the file to DigitalOcean Spaces

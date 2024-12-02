@@ -3,8 +3,6 @@ import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 export function SpecificVehicle({ testimonials }) {
  
-
-
   return (
     <div>
     
