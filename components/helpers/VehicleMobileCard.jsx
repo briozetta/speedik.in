@@ -6,14 +6,9 @@ import Link from "next/link";
 
 export default function VehicleMobileCard({ vehicle }) {
   return (
-    <Link
-      href={{
-        pathname: "/vehicle-details",
-        query: { id: vehicle._id },
-      }}
-    >
-      <div className="border rounded-lg mb-4 shadow-sm overflow-hidden hover:shadow-md transition-shadow flex bg-white">
-        {/* Image Section */}
+    <div className="border rounded-lg mb-4 shadow-sm overflow-hidden hover:shadow-md transition-shadow flex bg-white">
+      {/* Image Section */}
+      
         <div className="relative flex-shrink-0 w-[45%]">
           <Image
             src={vehicle.uploadedImages[0]}
@@ -27,7 +22,11 @@ export default function VehicleMobileCard({ vehicle }) {
         {/* Details Section moved to the right */}
         <div className="flex-grow p-4">
           {/* Header: Price */}
-          <div className="flex justify-between items-center">
+          <Link href={{
+          pathname: "/vehicle-details",
+          query: { id: vehicle._id },
+        }}>
+        <div className="flex justify-between items-center">
             <span className="text-lg font-semibold text-emerald-600">
               ₹ {vehicle.price.toLocaleString("en-IN")}
             </span>
@@ -45,8 +44,9 @@ export default function VehicleMobileCard({ vehicle }) {
 
           {/* Location */}
           <div className="text-xs text-gray-500 mt-2">{vehicle.district}</div>
+       </Link>
         </div>
-      </div>
-    </Link>
+     
+    </div>
   );
 }

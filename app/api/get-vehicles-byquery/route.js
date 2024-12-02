@@ -11,11 +11,13 @@ export async function GET(request) {
     const queryParams = request.nextUrl.searchParams;
     const skip = Number(queryParams.get("skip")) || 0;
     const limit = Number(queryParams.get("limit")) || 4;
-    const carFilter = queryParams.get("carFilter");
-    const vehicleFilter = queryParams.get("vehicleFilter");
+    // Trim whitespace from query parameters
+    const carFilter = queryParams.get("carFilter")?.trim();
+    const vehicleFilter = queryParams.get("vehicleFilter")?.trim();
 
-  console.log(vehicleFilter);
-  
+
+    console.log(carFilter);
+
     // Build the query object
     const query = {
       disabled: { $ne: true },
@@ -29,13 +31,14 @@ export async function GET(request) {
       query.vehicleType = "Four-Wheeler";
     }
 
+  
     // Fetch vehicles based on the query object
     const vehicles = await Vehicle.find(query)
-      .sort({createdAt: vehicleFilter === "recentlyAdded" ? -1 : 1   })
+      .sort({ createdAt: vehicleFilter === "recentlyAdded" ? -1 : 1 })
       .skip(skip)
       .limit(limit)
       .exec();
-
+   
     // Return the vehicles in the response
     return NextResponse.json({ vehicles }, { status: 200 });
   } catch (error) {
