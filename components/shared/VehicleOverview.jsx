@@ -19,7 +19,10 @@ import Image from "next/image";
 
 const VehicleOverview = ({ agentData }) => {
   const phoneNumber = agentData?.vehicle?.secondaryContact
-  const whatsappURL = phoneNumber ? `https://wa.me/91${agentData?.vehicle?.secondaryContact}` : null;
+  const whatsappURL = phoneNumber
+  ? `https://wa.me/+91${phoneNumber.replace(/\D/g, "")}`
+  : null;
+
 
   const carDetails = [
     {
@@ -142,27 +145,28 @@ const VehicleOverview = ({ agentData }) => {
             </div>
           </div>
 
-          <Button
-      variant="outline-success"
-      className={`w-full border rounded-2xl py-6 mb-3 flex items-center justify-center ${
-        phoneNumber
-          ? "text-emerald-600 border-green-500"
-          : "text-gray-400 border-gray-300 cursor-not-allowed"
-      }`}
-      as={phoneNumber ? "a" : "button"}
-      href={phoneNumber ? whatsappURL : undefined}
-      target={phoneNumber ? "_blank" : undefined}
-      rel={phoneNumber ? "noopener noreferrer" : undefined}
-      disabled={!phoneNumber}
-    >
-      {phoneNumber ? (
-        <>
-          Chat Via WhatsApp <FaArrowRight className="ml-2" />
-        </>
-      ) : (
-        "WhatsApp Not Available"
-      )}
-    </Button>
+          <a
+ 
+  className={`w-full border rounded-2xl py-2 mb-3 flex items-center justify-center ${
+    phoneNumber
+      ? "text-emerald-600 border-green-500"
+      : "text-gray-400 border-gray-300 cursor-not-allowed"
+  }`}
+  as={phoneNumber ? "a" : "button"}
+  href={phoneNumber ? whatsappURL : undefined}
+  target={phoneNumber ? "_blank" : undefined}
+  rel={phoneNumber ? "noopener noreferrer" : undefined}
+  disabled={!phoneNumber}
+>
+  {phoneNumber ? (
+    <>
+      Chat Via WhatsApp <FaArrowRight className="ml-2" />
+    </>
+  ) : (
+    "WhatsApp Not Available"
+  )}
+</a>
+
           {/* <a
             href="#"
             className="text-blue-500 text-center  flex items-center justify-center"
