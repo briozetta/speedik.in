@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import CarouselButton from "../helpers/CarouselButton";
-import VehcicleShortOverview from "../helpers/VehcicleShortOverview";
+import VehicleShortOverview from "../helpers/VehicleShortOverview";
 import { FaCalendarAlt, FaTachometerAlt, FaCogs, FaGasPump } from 'react-icons/fa';
 import { IoMdPricetags } from 'react-icons/io';
 import Link from 'next/link';
@@ -18,7 +18,7 @@ export default function VehicleDetailsPage({agentData}) {
             direction === "next"
                 ? (prev + 1) % carImages.length
                 : (prev - 1 + carImages.length) % carImages.length
-        );
+        );                  
     };
 
     const features = [
@@ -34,7 +34,7 @@ export default function VehicleDetailsPage({agentData}) {
             <div className="p-6 rounded-lg max-w-7xl mx-auto">
                 {/* Breadcrumb */}
                 <div className="text-sm text-gray-500 mb-4">
-                    <Link href="/listings" passHref>
+                    <Link href="/" passHref>
                         <span className="hover:underline text-blue-500 cursor-pointer">Home</span>
                     </Link>
                     {' / '}
@@ -86,6 +86,7 @@ export default function VehicleDetailsPage({agentData}) {
                             width={500}
                             height={500}
                             alt="Car"
+                            priority
                          className="w-full h-[400px] sm:h-[500px] object-fill sm:object-cover"
                         />
                         {/* Left/Right buttons */}
@@ -95,7 +96,7 @@ export default function VehicleDetailsPage({agentData}) {
                          
                     {/* Car Details */}
                     <div className="w-full md:w-1/2 p-6">
-                        <VehcicleShortOverview  agentData={agentData?.vehicle}/>
+                        <VehicleShortOverview  agentData={agentData?.vehicle}/>
                     </div>
                 </div>
             </div>

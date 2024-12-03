@@ -35,11 +35,7 @@ export default function VehicleDetailsPageSkeleton() {
   </div>
 
   <Skeleton className="w-full h-full object-cover rounded-lg" />
-  {/* Left and Right Arrow Skeletons */}
-  <div className="absolute top-1/2 left-0 flex items-center justify-between w-full px-4">
-    <Skeleton className="w-10 h-10 bg-emerald-300 rounded-full" />
-    <Skeleton className="w-10 h-10 bg-emerald-300 rounded-full" />
-  </div>
+  
 </div>
 
   

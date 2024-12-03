@@ -11,13 +11,27 @@ export async function GET() {
     }
 
     await connectDatabase();
-
-    try {
-        const vehicles = await Vehicle.find({ disabled: true });
-        // Return the vehicles in the response
-        return NextResponse.json({ vehicles }, { status: 200 });
-    } catch (error) {
-        console.error("Error fetching vehicles:", error);
-        return new Response("Internal Server Error", { status: 500 });
-    }
+    if (session.user.role === "Admin") {
+        try {
+          const vehicles = await Vehicle.find({ disabled: true });
+          // Return the vehicles in the response
+          return NextResponse.json({ vehicles }, { status: 200 });
+        } catch (error) {
+          console.error("Error fetching vehicles:", error);
+          return new Response("Internal Server Error", { status: 500 });
+        }
+      } else {
+        try {
+          const vehicles = await Vehicle.find({
+            disabled: true,
+            userId: session.user._id,
+          });
+          // Return the vehicles in the response
+          return NextResponse.json({ vehicles }, { status: 200 });
+        } catch (error) {
+          console.error("Error fetching user vehicles:", error);
+          return new Response("Internal Server Error", { status: 500 });
+        }
+      }
+  
 }

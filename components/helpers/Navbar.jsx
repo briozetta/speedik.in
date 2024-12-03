@@ -21,8 +21,9 @@ export default function Navbar() {
   const pathname = usePathname();
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
+    { name: "Four-Wheeler", href: "/vehicle-list" ,query:"Four-Wheeler"},
+    { name: "Two-Wheeler", href: "/vehicle-list" ,query:"Two-Wheeler" },
+    { name: "Commercial Vehicles", href: "/vehicle-list" ,query:"Commercial Vehicle"}, 
   ];
 
   return (
@@ -53,7 +54,9 @@ export default function Navbar() {
                 className="sm:block hidden text-[16px] font-normal"
               >
                 <Link
-                  href={item.href}
+                  href={{pathname:item.href,
+                    query:{id:item.query}
+                  }}
                   className={`hover:text-emerald-400 text-gray-100`}
                 >
                   {item.name === "Log in" ? (

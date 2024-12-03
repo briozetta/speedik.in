@@ -18,6 +18,9 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 const VehicleOverview = ({ agentData }) => {
+  const phoneNumber = agentData?.vehicle?.secondaryContact
+  const whatsappURL = phoneNumber ? `https://wa.me/91${agentData?.vehicle?.secondaryContact}` : null;
+
   const carDetails = [
     {
       icon: FaCarSide,
@@ -62,7 +65,7 @@ const VehicleOverview = ({ agentData }) => {
     },
     {
       icon: FaMoneyCheck,
-      label: "expected price ₹",
+      label: " ₹expected price",
       value: agentData?.vehicle?.price,
     },
   ];
@@ -140,18 +143,32 @@ const VehicleOverview = ({ agentData }) => {
           </div>
 
           <Button
-            variant="outline-success"
-            className="w-full border rounded-2xl py-6 text-emerald-600 border-green-500 mb-3 flex 
-      items-center justify-center"
-          >
-            Chat Via Whatsapp <FaArrowRight className="ml-2" />
-          </Button>
-          <a
+      variant="outline-success"
+      className={`w-full border rounded-2xl py-6 mb-3 flex items-center justify-center ${
+        phoneNumber
+          ? "text-emerald-600 border-green-500"
+          : "text-gray-400 border-gray-300 cursor-not-allowed"
+      }`}
+      as={phoneNumber ? "a" : "button"}
+      href={phoneNumber ? whatsappURL : undefined}
+      target={phoneNumber ? "_blank" : undefined}
+      rel={phoneNumber ? "noopener noreferrer" : undefined}
+      disabled={!phoneNumber}
+    >
+      {phoneNumber ? (
+        <>
+          Chat Via WhatsApp <FaArrowRight className="ml-2" />
+        </>
+      ) : (
+        "WhatsApp Not Available"
+      )}
+    </Button>
+          {/* <a
             href="#"
             className="text-blue-500 text-center  flex items-center justify-center"
           >
             View all stock at this dealer <FaArrowRight className="ml-2" />
-          </a>
+          </a> */}
         </div>
       </div>
     </div>

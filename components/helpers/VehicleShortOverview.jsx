@@ -5,6 +5,8 @@ import {
   FaWhatsapp,
   FaPhoneAlt,
 } from "react-icons/fa";
+import { ViewSellerInfo } from "./ViewSellerInfo";
+import WhatsAppComponent from "../ui/WhatsAppComponent";
 
 export default function VehcicleShortOverview({ agentData }) {
   return (
@@ -44,9 +46,9 @@ export default function VehcicleShortOverview({ agentData }) {
         | loacation - {agentData?.district} {agentData?.place || null}
       </p>
 
-      <button className="bg-emerald-500 text-white py-2 px-4 w-3/4 rounded-lg shadow-lg transform transition hover:scale-105">
-        View Seller Details
-      </button>
+      {/* view seller details */}
+      <ViewSellerInfo vehicle={agentData}/>
+      
       <div className="flex justify-between gap-3 items-center mt-6">
         <div className="text-base text-blue-500 flex items-center">
           <FaPhoneAlt className=" text-yellow-500 mr-2" size={20} />
@@ -56,26 +58,9 @@ export default function VehcicleShortOverview({ agentData }) {
           {agentData?.primaryContact}
         </div>
 
-        {agentData?.secondaryContact && (
-          <div className="text-gray-500 flex items-center">
-            <Link
-              href="/#agentcontact"
-              className="text-sm flex items-center hover:text-blue-500 transition"
-            >
-              <FaCommentDots className="mr-2" size={20} />
-              Chat with Seller
-            </Link>
-          </div>
-        )}
-      </div>
-      {agentData?.secondaryContact && (
-        <div className="flex justify-between gap-3 items-center mt-6">
-          <div className="text-xbase text-gray-500 flex items-center">
-            <FaWhatsapp className="text-green-500 mr-2" size={20} />
-            {agentData?.secondaryContact}
-          </div>
-        </div>
-      )}
+      </div>                 
+       <WhatsAppComponent phoneNumber={agentData?.secondaryContact}/>
+      
     </>
   );
 }
