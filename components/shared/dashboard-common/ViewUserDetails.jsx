@@ -1,7 +1,6 @@
 "use client"
 
 import { UserDatas } from "@/components/helpers/dashboard-helper/UserDatas"
-import { Button } from "@/components/ui/button"
 import {
   Sheet,
   SheetContent,
@@ -27,15 +26,16 @@ export function ViewUserDetails({ vehicle }) {
 
  
   // Check if agentData and agentVehicles are available
-  if (!agentData?.agentVehicles) {
+  if (!agentData?.agentVehicles) {                    
     return (
       <div className="grid grid-cols-2 gap-2">
         {SHEET_SIDES.map((side) => (
           <Sheet key={side}>
             <SheetTrigger asChild>
-              <Button variant="outline">
-                <span className="text-black">{vehicle?.fullname}</span> - view details
-              </Button>
+            <div className="text-emerald-500 py-1 px-2 cursor-pointer ">
+            view details
+              
+            </div>
             </SheetTrigger>
             <SheetContent
               side={side}
@@ -55,9 +55,10 @@ export function ViewUserDetails({ vehicle }) {
       {SHEET_SIDES.map((side) => (
         <Sheet key={side}>
           <SheetTrigger asChild>
-            <Button variant="outline">
-              <span className="text-black">{vehicle?.fullname}</span> - view details
-            </Button>
+            <div className="text-emerald-500 py-1 px-2 cursor-pointer">
+            view details
+              
+            </div>
           </SheetTrigger>
           <SheetContent
             side={side}

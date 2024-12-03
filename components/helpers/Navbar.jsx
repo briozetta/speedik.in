@@ -51,7 +51,7 @@ export default function Navbar() {
             {navItems.map((item, index) => (
               <li
                 key={index}
-                className="sm:block hidden text-[16px] font-normal"
+                className="xl:block hidden text-[16px] font-normal"
               >
                 <Link
                   href={{pathname:item.href,
@@ -82,7 +82,7 @@ export default function Navbar() {
               </li>
             ) : (
               <>
-                <li className="sm:block hidden  text-[16px]">
+                <li className="xl:block hidden  text-[16px]">
                   <Link
                     href={"/admin/dashboard-home"}
                     className=" text-emerald-400 flex justify-center items-center gap-1 hover:text-emerald-300"
@@ -90,7 +90,7 @@ export default function Navbar() {
                    <FaRegUser/> Dashboard
                   </Link>
                 </li>
-                <li className="sm:block hidden  text-[16px]">
+                <li className="xl:block hidden  text-[16px]">
                   <button
                     onClick={() => signOut({ redirect: false })}
                     className=" text-emerald-400 hover:text-emerald-300"
@@ -98,31 +98,32 @@ export default function Navbar() {
                     Sign Out
                   </button>
                 </li>
-              </>
+              </>   
             )}
           </>
-          <div className="sm:hidden block">
-            <Sheet>
+          <div className="xl:hidden block">
+            <Sheet >
               <SheetTrigger>
                 <Menu className="w-8 h-8 text-white" />
               </SheetTrigger>
-              <SheetContent>
+              <SheetContent className="bg-[#090909] opacity-80">
                 <SheetHeader>
                   <nav className="flex justify-center items-start flex-col space-y-4">
                     <>
                       {navItems.map((item, index) => (
                         <Link
-                          key={index}
-                          href={item.href}
-                          className={`text-lg font-medium hover:text-emerald-400`}
+                        href={{pathname:item.href,
+                          query:{id:item.query}
+                        }}
+                          className={`text-lg font-medium text-emerald-50`}
                         >
                           {item.name}
                         </Link>
                       ))}
                       {userData && (
                         <Link
-                          href={"/dashboard-home"}
-                          className={`text-lg font-medium hover:text-emerald-400`}
+                          href={"/admin/dashboard-home"}
+                          className={`text-lg font-medium text-emerald-100`}
                         >
                           Dashboard
                         </Link>

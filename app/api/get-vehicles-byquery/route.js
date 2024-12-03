@@ -15,9 +15,6 @@ export async function GET(request) {
     const carFilter = queryParams.get("carFilter")?.trim();
     const vehicleFilter = queryParams.get("vehicleFilter")?.trim();
 
-
-    console.log(carFilter);
-
     // Build the query object
     const query = {
       disabled: { $ne: true },

@@ -62,7 +62,7 @@ export default function AgentList({selectedValue}) {
                   Email / Number
                 </TableHead>
                 <TableHead className="hidden md:table-cell">
-                  Total Vehicles
+                  Role
                 </TableHead>
                 <TableHead className="hidden md:table-cell">
                   Created at
@@ -98,7 +98,7 @@ export default function AgentList({selectedValue}) {
                       <TableCell className="hidden md:table-cell text-violet-500">
                         {user.contact}
                       </TableCell>
-                      <TableCell className="hidden md:table-cell">6</TableCell>
+                      <TableCell className="hidden md:table-cell">{user.role}</TableCell>
                       <TableCell className="hidden md:table-cell text-orange-700">
                         {new Date(user.createdAt).toLocaleDateString("en-US", {
                           year: "numeric",

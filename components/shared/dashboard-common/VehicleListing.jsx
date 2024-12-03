@@ -29,6 +29,7 @@ export default function VehicleListing({ vehicles,handleRefresh ,selectedValue})
           </CardDescription>
         </CardHeader>
         <CardContent>
+          <div className="overflow-x-auto">
           <Table>
             {/* table header */}
             <TableHeader>
@@ -74,7 +75,8 @@ export default function VehicleListing({ vehicles,handleRefresh ,selectedValue})
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
                     
-                    <span className="text-blue-600" >
+                    <span className="text-blue-600 px-2" >
+                      {vehicle?.fullname}
                        <ViewUserDetails vehicle={vehicle}/>
                     </span>
                   </TableCell>
@@ -98,11 +100,12 @@ export default function VehicleListing({ vehicles,handleRefresh ,selectedValue})
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                       
+                      <DropdownMenuItem asChild className="cursor-pointer">
+                        <ViewUserDetails vehicle={vehicle}/></DropdownMenuItem>
                       <Link href={{
                         pathname:'/add-vehicles',
                         query: { id:vehicle._id  },
-                      }}><DropdownMenuItem>Edit</DropdownMenuItem></Link>
+                      }}><DropdownMenuItem className="cursor-pointer">Edit</DropdownMenuItem></Link>
                         <DropdownMenuItem asChild><DisableVehicleandUser
                          vehicleId={vehicle._id} handleRefresh={handleRefresh} query={"vehicle"}/></DropdownMenuItem>
                       </DropdownMenuContent>
@@ -116,6 +119,7 @@ export default function VehicleListing({ vehicles,handleRefresh ,selectedValue})
 
             {/* table content  end*/}
           </Table>
+          </div>
         </CardContent>
         
       </Card>

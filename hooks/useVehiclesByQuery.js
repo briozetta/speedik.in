@@ -13,7 +13,6 @@ export const useVehiclesByQuery = () => {
 
   // # Fetch vehicles with pagination
   const fetchCars = async (reset = false) => {
-      console.log(carFilter);
       
       if (loading) return; // Prevent multiple calls
       

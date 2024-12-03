@@ -47,7 +47,6 @@ const fileSlice = createSlice({
     
     setPrimaryImage: (state, action) => {
       const primaryImageUrl = action.payload;
-    console.log('redux image url---',primaryImageUrl);
     
       // Move the primary image to the front of the array
       const updatedImages = state.uploadedImages.filter(image => image.url !== primaryImageUrl);

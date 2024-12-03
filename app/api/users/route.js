@@ -31,6 +31,7 @@ export async function GET(request) {
 
         // Build the query object
         const query = {
+            role: { $ne: "Admin" },
             disabled: { $ne: true },
         };
         // Fetch users based on the filter

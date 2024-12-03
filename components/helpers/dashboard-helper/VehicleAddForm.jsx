@@ -306,7 +306,7 @@ export default function VehicleAddForm({id,
               </SelectGroup>
             </SelectContent>
           </Select>
-          {errors.condition && (
+          {errors.district && (
             <span className="text-red-600">{errors.district.message}</span>
           )}
         </div>

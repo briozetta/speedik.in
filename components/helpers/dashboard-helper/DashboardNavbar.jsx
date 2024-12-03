@@ -4,7 +4,7 @@ import {Home,LineChart,Package2,PanelLeft,Settings,} from "lucide-react";
 
 import {Tooltip,TooltipContent,TooltipTrigger,TooltipProvider,} from "@/components/ui/tooltip";
 import {Breadcrumb,BreadcrumbItem,BreadcrumbLink,BreadcrumbList,BreadcrumbPage,BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/components/ui/breadcrumb";  
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {DropdownMenu,DropdownMenuContent,DropdownMenuItem,DropdownMenuLabel,DropdownMenuSeparator,
@@ -13,7 +13,7 @@ import profileVector from "@/public/assets/profileVector.webp";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FcAdvertising ,FcMultipleDevices  ,FcReadingEbook ,FcAddImage  } from "react-icons/fc";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useAgents } from "@/hooks/useAgents";
 import EditAgentForm from "../admin-dashboard-helper/EditAgentForm";
 
@@ -80,8 +80,7 @@ export default function DashboardNavbar() {
             )
        
           ))}
-         
-          
+           
         </nav>
         <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
           <TooltipProvider>
@@ -91,7 +90,6 @@ export default function DashboardNavbar() {
                  
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
-                 
                   <span className="sr-only">settings</span>
                   <EditAgentForm userId={userId} role={true} handleRefresh={handleRefresh}/>
                 </span>
@@ -133,8 +131,8 @@ export default function DashboardNavbar() {
                  
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <LineChart className="h-5 w-5" />
-                  Settings
+                  
+                  <EditAgentForm userId={userId} role={true} handleRefresh={handleRefresh}/> settings
                 </span>
               </nav>
             </SheetContent>
@@ -143,18 +141,19 @@ export default function DashboardNavbar() {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="#">Dashboard</Link>
+                  <Link href="/admin/dashboard-home">Dashboard</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
+              {role === "Admin" &&
+              <><BreadcrumbItem>
+              <BreadcrumbLink asChild>
+               <Link href="/admin/dashboad-add-agent">Agents</Link>
+             </BreadcrumbLink>
+           </BreadcrumbItem>
+           <BreadcrumbSeparator /></>}
               <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="#">Products</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>All Products</BreadcrumbPage>
+                <BreadcrumbPage>Add Vehicle</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -177,12 +176,7 @@ export default function DashboardNavbar() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer"  onClick={() => signOut({ redirect: true })}>Logout</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

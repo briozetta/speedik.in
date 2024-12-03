@@ -27,9 +27,10 @@ export default function HomeDashboard() {
         </div>
 
         {/* table listings */}
-        <VehicleListing vehicles={vehicles} handleRefresh={handleRefresh} selectedValue={selectedValue}/>
+        {vehicles.length === 0 & !loading? <div className="text-center text-muted-foreground mt-60">No Vehicle Found!</div>:
+        <VehicleListing vehicles={vehicles} handleRefresh={handleRefresh} selectedValue={selectedValue}/>}
        
-        <div className="flex items-start lg:flex-row flex-col gap-2 justify-center">
+        <div className="flex items-center lg:flex-row flex-col gap-2 justify-center">
           <InfiniteScroll hasMore={hasMore} isLoading={loading} next={next} threshold={1}>
             {hasMore && <Loader2 className="my-4 h-8 w-8 animate-spin" />}
           </InfiniteScroll>
