@@ -118,7 +118,8 @@ export default function DashboardNavbar() {
                   <span className="sr-only">Acme Inc</span>
                 </Link>
                 {navItems.map((item,index)=>(
-                   <Link
+                   item.protected === false && (
+                    <Link
                    key={index}
                    href={item.navLink}
                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
@@ -126,6 +127,7 @@ export default function DashboardNavbar() {
                    <item.icon className="h-5 w-5" />
                    {item.name}
                  </Link>
+                   )
                 ))}
                 <span
                  
