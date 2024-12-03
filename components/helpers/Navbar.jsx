@@ -21,9 +21,13 @@ export default function Navbar() {
   const pathname = usePathname();
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Four-Wheeler", href: "/vehicle-list" ,query:"Four-Wheeler"},
-    { name: "Two-Wheeler", href: "/vehicle-list" ,query:"Two-Wheeler" },
-    { name: "Commercial Vehicles", href: "/vehicle-list" ,query:"Commercial Vehicle"}, 
+    { name: "Four-Wheeler", href: "/vehicle-list", query: "Four-Wheeler" },
+    { name: "Two-Wheeler", href: "/vehicle-list", query: "Two-Wheeler" },
+    {
+      name: "Commercial Vehicles",
+      href: "/vehicle-list",
+      query: "Commercial Vehicle",
+    },
   ];
 
   return (
@@ -54,9 +58,7 @@ export default function Navbar() {
                 className="xl:block hidden text-[16px] font-normal"
               >
                 <Link
-                  href={{pathname:item.href,
-                    query:{id:item.query}
-                  }}
+                  href={{ pathname: item.href, query: { id: item.query } }}
                   className={`hover:text-emerald-400 text-gray-100`}
                 >
                   {item.name === "Log in" ? (
@@ -87,7 +89,7 @@ export default function Navbar() {
                     href={"/admin/dashboard-home"}
                     className=" text-emerald-400 flex justify-center items-center gap-1 hover:text-emerald-300"
                   >
-                   <FaRegUser/> Dashboard
+                    <FaRegUser /> Dashboard
                   </Link>
                 </li>
                 <li className="xl:block hidden  text-[16px]">
@@ -98,11 +100,11 @@ export default function Navbar() {
                     Sign Out
                   </button>
                 </li>
-              </>   
+              </>
             )}
           </>
           <div className="xl:hidden block">
-            <Sheet >
+            <Sheet>
               <SheetTrigger>
                 <Menu className="w-8 h-8 text-white" />
               </SheetTrigger>
@@ -112,20 +114,28 @@ export default function Navbar() {
                     <>
                       {navItems.map((item, index) => (
                         <Link
-                        href={{pathname:item.href,
-                          query:{id:item.query}
-                        }}
+                          href={{
+                            pathname: item.href,
+                            query: { id: item.query },
+                          }}
                           className={`text-lg font-medium text-emerald-50`}
                         >
                           {item.name}
                         </Link>
                       ))}
-                      {userData && (
+                      {userData ? (
                         <Link
-                          href={"/admin/dashboard-home"}
-                          className={`text-lg font-medium text-emerald-100`}
+                          href="/admin/dashboard-home"
+                          className="text-lg font-medium text-emerald-100"
                         >
                           Dashboard
+                        </Link>
+                      ) : (
+                        <Link
+                          href="/login"
+                          className="text-lg font-medium text-emerald-100"
+                        >
+                          Login
                         </Link>
                       )}
                     </>
