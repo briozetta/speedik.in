@@ -1,5 +1,5 @@
 const WhatsAppComponent = ({ phoneNumber }) => {
-    const whatsappURL = `https://wa.me/919876543210`;
+    const whatsappURL = `https://wa.me/${phoneNumber}`;
 
     return (
       <div className="flex items-center space-x-4 p-4 mt-2 bg-green-50 border border-green-300 rounded-lg shadow-md">
