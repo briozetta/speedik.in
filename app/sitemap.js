@@ -49,47 +49,4 @@ async function fetchAllVehicles() {
   }
 }
 
-export async function GET() {
-    try {
-      // Fetch all vehicle IDs from your API
-      const { data } = await axios.get('https://Gaadi9.in/api/get-all-vehicles'); // Adjust API endpoint
-      const vehicleIds = data?.vehicles?.map((vehicle) => vehicle._id) || [];
-  
-      const baseUrl = 'https://Gaadi9.in';
-  
-      // Generate XML sitemap
-      const sitemap = `
-        <?xml version="1.0" encoding="UTF-8"?>
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-          ${vehicleIds
-            .map(
-              (id) => `
-            <url>
-              <loc>${baseUrl}/vehicle-details/${id}</loc>
-              <changefreq>weekly</changefreq>
-              <priority>0.8</priority>
-            </url>
-          `
-            )
-            .join('')}
-        </urlset>
-      `.trim();
-  
-      return new NextResponse(sitemap, {
-        headers: {
-          'Content-Type': 'application/xml',
-        },
-      });
-    } catch (error) {
-      console.error('Error generating sitemap:', error);
-  
-      return new NextResponse(
-        `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>`,
-        {
-          headers: {
-            'Content-Type': 'application/xml',
-          },
-        }
-      );
-    }
-  }
+
