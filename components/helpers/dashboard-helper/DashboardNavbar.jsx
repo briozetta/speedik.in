@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import {Home,LineChart,Package2,PanelLeft,Settings,} from "lucide-react";
+import {Home,PanelLeft,} from "lucide-react";
 
 import {Tooltip,TooltipContent,TooltipTrigger,TooltipProvider,} from "@/components/ui/tooltip";
 import {Breadcrumb,BreadcrumbItem,BreadcrumbLink,BreadcrumbList,BreadcrumbPage,BreadcrumbSeparator,
@@ -111,11 +111,11 @@ export default function DashboardNavbar() {
             <SheetContent side="left" className="sm:max-w-xs">
               <nav className="grid gap-6 text-lg font-medium">
                 <Link
-                  href="#"
+                  href="/"
                   className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                 >
-                  <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Acme Inc</span>
+                  <Home className="h-5 w-5 transition-all group-hover:scale-110" />
+                  <span className="sr-only">Home</span>
                 </Link>
                 {navItems.map((item,index)=>(
                    item.protected === false && (

@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { clearUploadedImages } from "@/redux/slices/handleFileUploadSlice";
 import useSWR from "swr";
 
-export default function AddProducts({ id }) {
+export default function AddVehicles({ id }) {
   const { uploadedImages, isLoading, error } = useSelector((state) => state.files);
   const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -69,15 +69,17 @@ export default function AddProducts({ id }) {
       toast.warning("Please add images", { position: "top-center", duration: 500 });
       return;
     }
-
+   
     const dataToSubmit = {
       ...formData,
-      userId,
+      ...(formData.userId ? {} : { userId }),
       uploadedImages: imageUrls,
     };
     setFormLoading(true);
 
     try {
+      
+      
       const res = id
         ? await axios.put(`/api/update-vehicle?id=${id}`, dataToSubmit) // Edit vehicle if `id` exists
         : await axios.post("/api/add-vehicle", dataToSubmit); // Add vehicle otherwise

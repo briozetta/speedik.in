@@ -22,7 +22,14 @@ export const metadata = {
     description: "Explore Gaadi9 for the best deals on used cars, bikes, and commercial vehicles. Buy or sell with ease on our reliable platform designed for vehicle enthusiasts. Your journey to the perfect ride starts here!",
     url: 'https://Gaadi9.in',
     type: 'website',
-   
+    images: [
+      {
+        url: 'https://Gaadi9.in/public/assets/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Home page image',
+      },
+    ],
   },
 };
 

@@ -18,6 +18,7 @@ export async function GET(request) {
       // Get the `userId` from query parameters
       const queryParams = request.nextUrl.searchParams;
       const userId = queryParams.get("userId");
+      
 
       const vehicles = await Vehicle.find({ userId: userId });
 

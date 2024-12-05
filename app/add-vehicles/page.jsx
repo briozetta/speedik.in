@@ -1,6 +1,6 @@
 'use client'
 
-import AddProducts from "@/components/shared/dashboard-common/AddProducts";
+import AddVehicles from "@/components/shared/dashboard-common/AddVehicles";
 import { useSearchParams } from "next/navigation";
 
 export default function Page() {
@@ -9,7 +9,7 @@ export default function Page() {
 
   return (
     <div>
-        <AddProducts id={id} />
+        <AddVehicles id={id} />
     </div>
   );
 }

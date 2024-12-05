@@ -4,13 +4,11 @@ import VehicleOverview from '@/components/shared/VehicleOverview';
 import VehiclieDetailsPage from '@/components/shared/VehiclieDetailsPage';
 import VehicleDetailsPageSkeleton from '@/components/ui/SkeletonLoadings/VehicleDetailsPageSkeleton';
 import axios from 'axios';
-import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
-export default function Page() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+export default function Page({params}) {
+  const id = params.id;
   const { data: agentData, isLoading } = useSWR(
     id ? `/api/get-specific-vehicle?id=${id}` : null,
     fetcher

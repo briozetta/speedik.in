@@ -58,10 +58,7 @@ export default function HomeSection() {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link
-                      href={{
-                        pathname:'/vehicle-list',
-                        query:{id:vehicle.filter}
-                      }}
+                      href={`/vehicle-list/${vehicle.filter}`}
                       className="flex-1 mx-1 hover:bg-gray-200 duration-300 cursor-pointer transition 
                         rounded-full flex hover:text-black items-center px-6 py-4 sm:border-b-[1.5px] border-b-2 
                         border-emerald-500"

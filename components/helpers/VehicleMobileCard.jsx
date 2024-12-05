@@ -22,10 +22,7 @@ export default function VehicleMobileCard({ vehicle }) {
         {/* Details Section moved to the right */}
         <div className="flex-grow p-4">
           {/* Header: Price */}
-          <Link href={{
-          pathname: "/vehicle-details",
-          query: { id: vehicle._id },
-        }}>
+          <Link href={`/vehicle-details/${vehicle._id}`}>
         <div className="flex justify-between items-center">
             <span className="text-lg font-semibold text-emerald-600">
               ₹ {vehicle.price.toLocaleString("en-IN")}

@@ -7,7 +7,7 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
-  SheetTrigger,
+  SheetTrigger,SheetClose
 } from "@/components/ui/sheet";
 
 import { CarFront } from "lucide-react";
@@ -20,7 +20,7 @@ export default function Navbar() {
 
   const pathname = usePathname();
   const navItems = [
-    { name: "Home", href: "/" },
+   
     { name: "Four-Wheeler", href: "/vehicle-list", query: "Four-Wheeler" },
     { name: "Two-Wheeler", href: "/vehicle-list", query: "Two-Wheeler" },
     {
@@ -33,7 +33,7 @@ export default function Navbar() {
   return (
     <nav
       className={`${
-        pathname === "/vehicle-list" || pathname === "/vehicle-details"
+        pathname.includes("/vehicle-list/") || pathname.includes("/vehicle-details") 
           ? "bg-[#050B20]"
           : "bg-none"
       } pt-6 p-7 fixed top-0
@@ -52,13 +52,17 @@ export default function Navbar() {
         </div>
         <ul className="flex space-x-10 sm:padding-x">
           <>
+          <li><Link
+                  href={ '/'}
+                  className={`hover:text-emerald-400 text-gray-100`}
+                >Home</Link></li>
             {navItems.map((item, index) => (
               <li
                 key={index}
                 className="xl:block hidden text-[16px] font-normal"
               >
                 <Link
-                  href={{ pathname: item.href, query: { id: item.query } }}
+                  href={ `/vehicle-list/${item.query}`}
                   className={`hover:text-emerald-400 text-gray-100`}
                 >
                   {item.name === "Log in" ? (
@@ -108,36 +112,39 @@ export default function Navbar() {
               <SheetTrigger>
                 <Menu className="w-8 h-8 text-white" />
               </SheetTrigger>
-              <SheetContent className="bg-[#090909] opacity-80">
+              <SheetContent className="bg-[#090909]">
                 <SheetHeader>
                   <nav className="flex justify-center items-start flex-col space-y-4">
                     <>
+                    <SheetClose asChild>
+                  <Link href="/" className={`text-lg font-medium text-emerald-50`}>Home</Link>
+                </SheetClose>
                       {navItems.map((item, index) => (
-                        <Link
-                          href={{
-                            pathname: item.href,
-                            query: { id: item.query },
-                          }}
+                          <SheetClose asChild>
+                         <Link
+                        key={index}
+                        href={ `/vehicle-list/${item.query}`}
                           className={`text-lg font-medium text-emerald-50`}
                         >
                           {item.name}
-                        </Link>
+                        </Link>   
+                        </SheetClose>
                       ))}
                       {userData ? (
                         <Link
                           href="/admin/dashboard-home"
-                          className="text-lg font-medium text-emerald-100"
+                          className="text-lg font-medium text-emerald-500"
                         >
                           Dashboard
                         </Link>
                       ) : (
                         <Link
                           href="/login"
-                          className="text-lg font-medium text-emerald-100"
+                          className="text-lg font-medium text-emerald-600"
                         >
                           Login
                         </Link>
-                      )}
+                      )}                             
                     </>
                   </nav>
                 </SheetHeader>

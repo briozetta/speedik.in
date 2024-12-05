@@ -2,7 +2,6 @@
 import Advertisement from "@/components/shared/Advertisement";
 
 import SearchAndFilter from "@/components/shared/SearchAndFilter";
-import { useSearchParams } from "next/navigation";
 import InfiniteScroll from "@/components/ui/infinite-scroll";
 import { useVehiclesByQuery } from "@/hooks/useVehiclesByQuery";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,10 +13,9 @@ const VehicleCardList = dynamic(() => import('@/components/shared/VehicleCardLis
   loading: () => <FullScreenLoader/>, 
 });
 
-export default function VehiclceListings() {
-  const searchParams = useSearchParams();
+export default function VehiclceListings({id}) {
+ 
   const {  searchTerm } = useSelector((state) => state.carFilters);
-  const id = searchParams.get("id");
   const { vehicles, loading, hasMore, next } = useVehiclesByQuery();
   const dispatch = useDispatch();
   dispatch(setCarFilter(id));
@@ -30,7 +28,7 @@ export default function VehiclceListings() {
   )
   return (
     <>
-      <div className="mt-10 bg-[#050B20]">
+      <div className="pt-10 bg-[#050B20]">
         <SearchAndFilter />
       </div>
 
