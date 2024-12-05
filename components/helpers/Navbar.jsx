@@ -52,7 +52,7 @@ export default function Navbar() {
         </div>
         <ul className="flex space-x-10 sm:padding-x">
           <>
-          <li><Link
+          <li><Link    
                   href={ '/'}
                   className={`hover:text-emerald-400 xl:block hidden text-gray-100`}
                 >Home</Link></li>

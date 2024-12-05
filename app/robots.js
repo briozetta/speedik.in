@@ -5,6 +5,6 @@ export default function robots() {
         allow: '/',
         disallow: '/private/',
       },
-      sitemap: 'https://Gaadi9.in/sitemap.xml',
+      sitemap: 'https://gaadi9.in/sitemap.xml',
     }
   }
