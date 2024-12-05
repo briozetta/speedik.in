@@ -54,7 +54,7 @@ export default function Navbar() {
           <>
           <li><Link
                   href={ '/'}
-                  className={`hover:text-emerald-400 text-gray-100`}
+                  className={`hover:text-emerald-400 xl:block hidden text-gray-100`}
                 >Home</Link></li>
             {navItems.map((item, index) => (
               <li
