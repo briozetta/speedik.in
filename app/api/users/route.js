@@ -39,7 +39,7 @@ export async function GET(request) {
             users = await User.find(query).sort({ createdAt: -1 })
                 .skip(skip).limit(limit).exec(); // Sort by most recent entries first
         } else {
-            users = await User.find().sort({ createdAt: 1 })
+            users = await User.find(query).sort({ createdAt: 1 })
                 .skip(skip).limit(limit).exec(); // Sort by oldest entries first
         }
 
