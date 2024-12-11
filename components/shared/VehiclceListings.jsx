@@ -5,10 +5,11 @@ import SearchAndFilter from "@/components/shared/SearchAndFilter";
 import InfiniteScroll from "@/components/ui/infinite-scroll";
 import { useVehiclesByQuery } from "@/hooks/useVehiclesByQuery";
 import { useDispatch, useSelector } from "react-redux";
-import { setCarFilter } from "@/redux/slices/carFilterDashboad";
+import { setVehicleSecondFilter } from "@/redux/slices/carFilterDashboad";
 import { Loader2 } from "lucide-react";
 import FullScreenLoader from "../ui/SkeletonLoadings/FullScreenLoader";
 import dynamic from "next/dynamic";
+import NoVehiclesFound from "../ui/SkeletonLoadings/NoVehiclesFound";
 const VehicleCardList = dynamic(() => import('@/components/shared/VehicleCardList'), {
   loading: () => <FullScreenLoader/>, 
 });
@@ -18,7 +19,7 @@ export default function VehiclceListings({id}) {
   const {  searchTerm } = useSelector((state) => state.carFilters);
   const { vehicles, loading, hasMore, next } = useVehiclesByQuery();
   const dispatch = useDispatch();
-  dispatch(setCarFilter(id));
+  dispatch(setVehicleSecondFilter(id));
 
   const filteredvehicles = vehicles
   .filter(
@@ -33,7 +34,9 @@ export default function VehiclceListings({id}) {
       </div>
 
       {(filteredvehicles.length === 0) & !loading ? (
-        <div className="text-center text-gray-500">No vehicles available</div>
+        <>
+        <NoVehiclesFound/>
+        </>
       ) : (
         <div className=" bg-white mb-6 padding-x ">
           <VehicleCardList vehicles={filteredvehicles} />

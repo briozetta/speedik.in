@@ -39,8 +39,6 @@ export default function EditAgentForm({ userId, handleRefresh, role }) {
 
   // Populate form fields with fetched user data
   useEffect(() => {
-  
-    
     if (userData?.user) {
       formFields.forEach(({ id }) => {
         if (id !== "password") setValue(id, userData?.user[id] || "");
@@ -76,7 +74,7 @@ export default function EditAgentForm({ userId, handleRefresh, role }) {
       <AlertDialogContent className="max-w-md p-6 rounded-lg shadow-lg">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-xl font-semibold text-gray-800">
-            Edit User Details{userId}
+            Edit User Details
           </AlertDialogTitle>
           <AlertDialogDescription className="text-sm text-gray-500 mt-2">
             Update the user details below.

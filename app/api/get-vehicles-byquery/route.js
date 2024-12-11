@@ -12,13 +12,20 @@ export async function GET(request) {
     const skip = Number(queryParams.get("skip")) || 0;
     const limit = Number(queryParams.get("limit")) || 4;
     // Trim whitespace from query parameters
-    const carFilter = queryParams.get("carFilter")?.trim();
+    const carFilter = queryParams.get("vehicleSecondFilter")?.trim();
     const vehicleFilter = queryParams.get("vehicleFilter")?.trim();
+    const district = queryParams.get("location")
+
 
     // Build the query object
     const query = {
       disabled: { $ne: true },
+      
     };
+    if (district !== "Default") {
+      query.district =  district ;
+    }
+
 
     if (carFilter === "Two-Wheeler") {
       query.vehicleType = "Two-Wheeler";

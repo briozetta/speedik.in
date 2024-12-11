@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState ={
     searchTerm : "",
     carFilter:"recentlyAdded",
-    vehicleFilter:"recentlyAdded"
+    vehicleSecondFilter:"",
+    vehicleFilter:"recentlyAdded",
+    locationFilter:"Default"
 }
 
 const filterSlice = createSlice({
@@ -18,9 +20,17 @@ const filterSlice = createSlice({
         },
         setVehicleFilter :(state,action)=>{
             state.vehicleFilter = action.payload;
+        },
+        setLocationFilter :(state,action)=>{
+            state.locationFilter = action.payload;
+        },
+        setVehicleSecondFilter :(state,action)=>{
+            state.vehicleSecondFilter = action.payload;
         }
     }
 })
 
-export const {setSearchTerm,setCarFilter,setVehicleFilter} = filterSlice.actions;
+export const {setSearchTerm,setCarFilter,setVehicleFilter,setVehicleSecondFilter
+    ,setLocationFilter
+} = filterSlice.actions;
 export default filterSlice.reducer;
