@@ -1,16 +1,10 @@
-import Dashboardlayout from '@/components/ui/Dashboard-layout'
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AddByAdmin from "@/components/shared/Advertisement";
 
 export default function page() {
   return (
-    <section>
-        <Dashboardlayout>
-        <Tabs>
-        <div className='flex text-3xl h-80 justify-center items-center '>
-            coming soon...
-        </div>
-        </Tabs>
-        </Dashboardlayout>
-    </section>
+    <main>
+      <section className="mx-6"><AddByAdmin /></section>
+
+    </main>
   )
 }

@@ -8,13 +8,13 @@ export const dynamic = "force-dynamic";
 export async function GET(request) {
     try {
         // Get the session and check authentication
-        const session = await getServerSession(authOptions);
-        if (!session) {
-            return NextResponse.json(
-                { message: "You must be logged in to access this resource" },
-                { status: 401 }
-            );
-        }
+        // const session = await getServerSession(authOptions);
+        // if (!session) {
+        //     return NextResponse.json(
+        //         { message: "You must be logged in to access this resource" },
+        //         { status: 401 }
+        //     );
+        // }
 
         // Connect to the database
         await connectDatabase();
@@ -52,3 +52,21 @@ export async function GET(request) {
         );
     }
 }
+
+
+
+// export default async function handler(req, res) {
+//   if (req.method === 'GET') {
+//     try {
+//       const client = await clientPromise;
+//       const db = client.db('your_database_name');
+//       const advertisements = await db.collection('advertisements').find({}).toArray();
+
+//       res.status(200).json({ data: advertisements });
+//     } catch (error) {
+//       res.status(500).json({ message: 'Failed to fetch advertisements', error });
+//     }
+//   } else {
+//     res.status(405).json({ message: 'Method not allowed' });
+//   }
+// }
