@@ -1,6 +1,5 @@
 // components/CarCard.jsx
 import Image from "next/image"; 
-import { IoMdBookmark } from "react-icons/io"; 
 import { IoMdCar } from "react-icons/io";
 import { FaGasPump } from "react-icons/fa"; 
 import Link from "next/link";
@@ -19,17 +18,13 @@ export default function VehicleCard({ vehicle }) {
           alt={vehicle.model}
           fill 
           sizes="(min-width: 808px) 50vw, 100vw"
-         
           className="rounded-t-xl"
         />
         {/* Price Tag */}
         <div className="absolute top-2 left-2 bg-emerald-600 text-white px-3 py-1 rounded-full text-sm">
           {vehicle.brand} 
         </div>
-        {/* Save Button */}
-        <button className="absolute top-2 right-2 bg-white rounded-full p-2 shadow">
-          <IoMdBookmark className="w-5 h-5 text-gray-800" />
-        </button>
+       
       </div>
 
       <div className="p-3 px-6">

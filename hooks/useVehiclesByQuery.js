@@ -9,7 +9,7 @@ export const useVehiclesByQuery = () => {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [vehicles, setVehicles] = useState([]); 
-  const { carFilter ,vehicleFilter} = useSelector((state) => state.carFilters);
+  const { vehicleSecondFilter ,vehicleFilter,locationFilter} = useSelector((state) => state.carFilters);
 
   // # Fetch vehicles with pagination
   const fetchCars = async (reset = false) => {
@@ -18,8 +18,8 @@ export const useVehiclesByQuery = () => {
       
       setLoading(true);
     const { data } = await axios.get(
-      `/api/get-vehicles-byquery?limit=${limit}&skip=${reset ? 0 : limit * page}&carFilter=${carFilter}
-      &vehicleFilter=${vehicleFilter}`
+      `/api/get-vehicles-byquery?limit=${limit}&skip=${reset ? 0 : limit * page}&vehicleSecondFilter=${vehicleSecondFilter}
+      &vehicleFilter=${vehicleFilter}&location=${locationFilter}`
     );
     const activeVehicles = data.vehicles.filter((vehicle) => !vehicle.disabled);
     if (reset) {
@@ -40,10 +40,10 @@ export const useVehiclesByQuery = () => {
   // # Refresh vehicles without resetting page counter unnecessarily
   const handleRefresh = () => fetchCars(true);
 
-  // # Trigger fetchCars when carFilter changes
+  // # Trigger fetchCars when vehicleSecondFilter changes
   useEffect(() => {
     fetchCars(true); // #Reset and fetch vehicles when filters change
-  }, [carFilter,vehicleFilter]);
+  }, [vehicleSecondFilter,vehicleFilter,locationFilter]);
 
   return { vehicles, loading, hasMore, next, handleRefresh, fetchCars };
 };

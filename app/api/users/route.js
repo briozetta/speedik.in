@@ -5,13 +5,13 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
+
 export async function GET(request) {
     try {
         const session = await getServerSession(authOptions);
         if (!session) {
             return new Response('You must be logged in to access this resource', { status: 401 });
         }
-
         // check if the user is an admin
         if (session.user?.role !== 'Admin') {
             return new Response('You are not an admin', { status: 403 });

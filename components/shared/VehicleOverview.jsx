@@ -27,7 +27,7 @@ const VehicleOverview = ({ agentData }) => {
   const carDetails = [
     {
       icon: FaCarSide,
-      label: "Type",
+      label: "Model",
       value: `${agentData?.vehicle?.brand} ${agentData?.vehicle?.model}`,
     },
     {
