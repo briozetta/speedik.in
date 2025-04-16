@@ -141,6 +141,7 @@ export default function VehiclceListings({ id }) {
                                 objectFit="cover"
                                 className="rounded-tl-lg rounded-bl-lg"
                                 priority
+                                unoptimized
                               />
                             </div>
                           </SwiperSlide>
