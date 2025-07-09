@@ -15,16 +15,16 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: 'Gaadi9 - Buy and Sell Used Vehicles',
-  description: "Gaadi9 is your trusted platform for buying and selling used vehicles, including cars, bikes, and commercial vehicles. Find your perfect vehicle or sell effortlessly with our seamless interface. Start your journey today!",
+  title: 'Speedik - Buy and Sell Used Vehicles',
+  description: "Speedik is your trusted platform for buying and selling used vehicles, including cars, bikes, and commercial vehicles. Find your perfect vehicle or sell effortlessly with our seamless interface. Start your journey today!",
   openGraph: {
-    title: 'Gaadi9 - Used Vehicle Marketplace',
-    description: "Explore Gaadi9 for the best deals on used cars, bikes, and commercial vehicles. Buy or sell with ease on our reliable platform designed for vehicle enthusiasts. Your journey to the perfect ride starts here!",
-    url: 'https://gaadi9.in',
+    title: 'Speedik - Used Vehicle Marketplace',
+    description: "Explore Speedik for the best deals on used cars, bikes, and commercial vehicles. Buy or sell with ease on our reliable platform designed for vehicle enthusiasts. Your journey to the perfect ride starts here!",
+    url: 'https://Speedik.in',
     type: 'website',
     images: [
       {
-        url: 'https://gaadi9.in/public/assets/logo.png',
+        url: 'https://Speedik.in/public/assets/logo.png',
         width: 1200,
         height: 630,
         alt: 'Home page image',

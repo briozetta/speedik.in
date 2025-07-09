@@ -9,7 +9,7 @@ export default function FullScreenLoader() {
 
       {/* Logo */}
       <h1 className="mt-6 text-2xl font-semibold text-gray-800 tracking-wide">
-        Gaadi<span className="text-emerald-500">9</span>
+        Speed<span className="text-emerald-500">Dik</span>
       </h1>
 
       {/* Loading Text */}

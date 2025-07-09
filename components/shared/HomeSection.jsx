@@ -45,7 +45,7 @@ export default function HomeSection() {
           dark:from-neutral-500 dark:via-white dark:to-white">
           Pick Your Vehicle with{" "}
           <span className="bg-gradient-to-r from-emerald-600 opacity-100  to-green-300 bg-clip-text text-transparent">
-            Gaadi9
+            Speedik
           </span>
         </h1>
 

@@ -46,7 +46,7 @@ export default function Navbar() {
           <Link href="/">
             <span className="text-gray-50 text-3xl flex items-center">
               <CarFront className="mr-1.5" />
-              Gaadi<span className="text-emerald-400  text-4xl">9</span>
+              Speed<span className="text-emerald-400  text-4xl">Dik</span>
             </span>
           </Link>
         </div>

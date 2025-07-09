@@ -5,7 +5,7 @@ export async function generateMetadata({ params }) {
 
   try {
     const { data } = await axios.get(
-      `https://gaadi9.in/api/get-specific-vehicle?id=${id}`
+      `https://Speedik.in/api/get-specific-vehicle?id=${id}`
     );
 
     const vehicleName = data?.vehicle?.model || "Vehicle Details";
@@ -17,10 +17,10 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: `${vehicleName} - Vehicle Details`,
         description,
-        url: `https://gaadi9.in/vehicle-details/${id}`,
+        url: `https://Speedik.in/vehicle-details/${id}`,
         images: [
           {
-            url: data?.vehicle?.uploadedImages[0] || 'https://gaadi9.in/public/assets/logo.png',
+            url: data?.vehicle?.uploadedImages[0] || 'https://Speedik.in/public/assets/logo.png',
             width: 800,
             height: 600,
             alt: `${vehicleName} Image`,
