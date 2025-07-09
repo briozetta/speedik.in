@@ -22,7 +22,7 @@ import img1 from "../../public/assets/banner3.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation , Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 
 
 const VehicleCardList = dynamic(() => import('@/components/shared/VehicleCardList'), {
@@ -47,7 +47,11 @@ export default function VehiclceListings({ id }) {
 
   const fetchAdvertisements = async () => {
     try {
-      const response = await fetch('/api/get-advertisement');
+      // const response = await fetch('/api/get-advertisement');
+      const response = await fetch('/api/get-advertisement?ts=' + Date.now(), {
+        cache: 'no-store',
+      });
+
       if (!response.ok) {
         throw new Error('Failed to fetch advertisements');
       }
@@ -65,8 +69,8 @@ export default function VehiclceListings({ id }) {
   // Filter ads when ads or VehicleType changes
   useEffect(() => {
     const matchedAds = ads.filter(ad => ad.addType === VehicleType);
-    console.log("matchedAds",matchedAds);
-    
+    console.log("matchedAds", matchedAds);
+
     setFilteredAds(matchedAds);
   }, [ads, VehicleType]);
 
@@ -120,18 +124,18 @@ export default function VehiclceListings({ id }) {
                     </div>
                     {/* Right Section */}
                     <div className="relative w-full h-full">
-                      
-                      <Swiper spaceBetween={20} 
-                      slidesPerView={1}
-                      navigation={true}
-                      autoplay={{
-                        delay: 2000, 
-                        disableOnInteraction: false,  
-                      }}
-                      loop={true}  
-                      modules={[Navigation, Autoplay]}  
-                       >
-                      {ad.uploadedImages.map((img, index) => (
+
+                      <Swiper spaceBetween={20}
+                        slidesPerView={1}
+                        navigation={true}
+                        autoplay={{
+                          delay: 2000,
+                          disableOnInteraction: false,
+                        }}
+                        loop={true}
+                        modules={[Navigation, Autoplay]}
+                      >
+                        {ad.uploadedImages.map((img, index) => (
                           <SwiperSlide key={index}>
                             <div className="relative w-full h-72">
                               <Image
